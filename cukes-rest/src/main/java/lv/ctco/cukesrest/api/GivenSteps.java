@@ -4,11 +4,11 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import cucumber.api.java.en.Given;
 import io.restassured.http.ContentType;
-import lv.ctco.cukesrest.CukesOptions;
-import lv.ctco.cukesrest.internal.RequestSpecificationFacade;
-import lv.ctco.cukesrest.internal.VariableFacade;
-import lv.ctco.cukesrest.internal.context.GlobalWorldFacade;
-import lv.ctco.cukesrest.internal.resources.ResourceFileReader;
+import lv.ctco.cukescore.CukesOptions;
+import lv.ctco.cukescore.internal.RequestSpecificationFacade;
+import lv.ctco.cukescore.internal.VariableFacade;
+import lv.ctco.cukescore.internal.context.GlobalWorldFacade;
+import lv.ctco.cukescore.internal.resources.ResourceFileReader;
 
 @Singleton
 public class GivenSteps {
