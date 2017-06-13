@@ -6,7 +6,7 @@ import cucumber.api.java.en.Given;
 import io.restassured.http.ContentType;
 import lv.ctco.cukescore.CukesOptions;
 import lv.ctco.cukescore.internal.RequestSpecificationFacade;
-import lv.ctco.cukescore.internal.VariableFacade;
+import lv.ctco.cukesrest.VariableFacade;
 import lv.ctco.cukescore.internal.context.GlobalWorldFacade;
 import lv.ctco.cukescore.internal.resources.ResourceFileReader;
 

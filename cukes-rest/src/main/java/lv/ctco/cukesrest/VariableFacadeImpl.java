@@ -1,4 +1,4 @@
-package lv.ctco.cukescore.internal;
+package lv.ctco.cukesrest;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;

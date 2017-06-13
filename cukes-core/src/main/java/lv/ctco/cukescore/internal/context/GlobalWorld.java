@@ -4,7 +4,6 @@ import com.google.common.base.Optional;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import lv.ctco.cukescore.CukesRuntimeException;
-import lv.ctco.cukescore.internal.di.CukesGuiceModule;
 
 import java.io.IOException;
 import java.net.URL;
@@ -16,9 +15,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import static lv.ctco.cukescore.CukesOptions.BASE_URI;
 import static lv.ctco.cukescore.CukesOptions.PROPERTIES_PREFIX;
 import static lv.ctco.cukescore.CukesOptions.RESOURCES_ROOT;
+import static lv.ctco.cukescore.internal.helpers.Files.createCukesPropertyFileUrl;
 
 @Singleton
-class GlobalWorld {
+public class GlobalWorld {
     private Map<String, String> context;
 
     @Inject
@@ -76,16 +76,5 @@ class GlobalWorld {
 
     public void remove(String key) {
         context.remove(key);
-    }
-
-    /**
-     * @see CukesGuiceModule#createCukesPropertyFileUrl(ClassLoader)
-     */
-    private URL createCukesPropertyFileUrl(final ClassLoader classLoader) {
-        String cukesProfile = System.getProperty("cukes.profile");
-        String propertiesFileName = cukesProfile == null || cukesProfile.isEmpty()
-            ? "cukes.properties"
-            : "cukes-" + cukesProfile + ".properties";
-        return classLoader.getResource(propertiesFileName);
     }
 }

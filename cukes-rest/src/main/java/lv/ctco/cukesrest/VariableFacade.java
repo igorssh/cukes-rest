@@ -1,4 +1,4 @@
-package lv.ctco.cukescore.internal;
+package lv.ctco.cukesrest;
 
 public interface VariableFacade {
 
