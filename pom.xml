@@ -36,6 +36,12 @@
             <organization>C.T.Co</organization>
             <organizationUrl>http://ctco.github.io/</organizationUrl>
         </developer>
+        <developer>
+            <name>Igor Gursky</name>
+            <email>igors.gurskis@gmail.com</email>
+            <organization>C.T.Co</organization>
+            <organizationUrl>http://ctco.github.io/</organizationUrl>
+        </developer>
     </developers>
 
     <scm>

@@ -21,7 +21,7 @@
         <guava.version>20.0</guava.version>
         <cucumber.version>1.2.5</cucumber.version>
         <awaitility.version>1.7.0</awaitility.version>
-        <rest-assured.version>3.0.2</rest-assured.version>
+        <rest-assured.version>3.0.3</rest-assured.version>
     </properties>
 
     <build>
