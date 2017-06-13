@@ -35,7 +35,7 @@ class OfTypeMatcherTest {
     @Test
     void "json object returned is Float"() throws Exception {
         def content = '{"value": 1.1}'
-        assertThat(new RequestBody(JSON, content), containsValueByPath("value", ofType("float")))
+        assertThat(new RequestBody(JSON, content), containsValueByPath("value", ofType("bigdecimal")))
     }
 
     @Test

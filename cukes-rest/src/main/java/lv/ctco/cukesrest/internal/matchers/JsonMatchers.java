@@ -5,7 +5,6 @@ import io.restassured.path.json.config.JsonPathConfig;
 import io.restassured.path.xml.XmlPath;
 import io.restassured.path.xml.config.XmlPathConfig;
 import io.restassured.response.ResponseBodyExtractionOptions;
-import lv.ctco.cukesrest.internal.helpers.Strings;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -17,7 +16,6 @@ import java.util.List;
 import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
 
 public class JsonMatchers {
-
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JsonMatchers.class);
 
@@ -31,22 +29,25 @@ public class JsonMatchers {
             public boolean matches(Object o) {
                 try {
                     RestAssuredResponseOptionsImpl responseBody = (RestAssuredResponseOptionsImpl) o;
-                    /*
-                     * Fix for Unexisting .dtd
-                     * https://github.com/rest-assured/rest-assured/issues/391
-                     */
-                    if (containsIgnoreCase(responseBody.getContentType(), "xml")) {
+                    String contentType = responseBody.getContentType();
+
+                    if (containsIgnoreCase(contentType, "xml")) {
                         XmlPathConfig config = new XmlPathConfig().disableLoadingOfExternalDtd();
                         this.value = responseBody.xmlPath(config).get(path);
+
+                    } else if (containsIgnoreCase(contentType, "html")) {
+                        XmlPath htmlPath = responseBody.htmlPath();
+                        List<Object> list = htmlPath.getList(path);
+                        this.value =
+                            list.size() > 1
+                                ? list
+                                : htmlPath.getString(path);
+
                     } else {
                         JsonPathConfig config = new JsonPathConfig().numberReturnType(JsonPathConfig.NumberReturnType.BIG_DECIMAL);
                         this.value = responseBody.jsonPath(config).get(path);
                     }
-                    /* Due to REST assured Compatibility Mode HTML */
-                    if (Strings.containsIgnoreCase(responseBody.getContentType(), "html")) {
-                        List<Object> list = ((XmlPath) this.value).getList(path);
-                        this.value = list.size() > 1 ? list : ((XmlPath) this.value).getString(path);
-                    }
+
                     return matcher.matches(this.value);
                 } catch (Exception e) {
                     LOGGER.info(e.getMessage(), e);
@@ -77,20 +78,19 @@ public class JsonMatchers {
             public boolean matches(Object o) {
                 try {
                     RestAssuredResponseOptionsImpl responseBody = (RestAssuredResponseOptionsImpl) o;
-                    /*
-                     * Fix for Unexisting .dtd
-                     * https://github.com/rest-assured/rest-assured/issues/391
-                     */
                     if (containsIgnoreCase(responseBody.getContentType(), "xml")) {
                         XmlPathConfig config = new XmlPathConfig().disableLoadingOfExternalDtd();
                         this.value = responseBody.xmlPath(config).get(path);
+                    } else if (containsIgnoreCase(responseBody.getContentType(), "html")) {
+                        XmlPath htmlPath = responseBody.htmlPath();
+                        List<Object> list = htmlPath.getList(path);
+                        this.value =
+                            list.size() > 1
+                                ? list
+                                : htmlPath.getString(path);
                     } else {
-                        this.value = responseBody.path(path);
-                    }
-                    /* Due to REST assured Compatibility Mode HTML */
-                    if (Strings.containsIgnoreCase(responseBody.getContentType(), "html")) {
-                        List<Object> list = ((XmlPath) this.value).getList(path);
-                        this.value = list.size() > 1 ? list : ((XmlPath) this.value).getString(path);
+                        JsonPathConfig config = new JsonPathConfig().numberReturnType(JsonPathConfig.NumberReturnType.BIG_DECIMAL);
+                        this.value = responseBody.jsonPath(config).get(path);
                     }
                     if (this.value instanceof List) {
                         List<Object> list = (List) this.value;
