@@ -1,4 +1,4 @@
-package lv.ctco.cukesrest.internal.matchers;
+package lv.ctco.cukescore.internal.matchers;
 
 import org.hamcrest.*;
 import org.junit.*;
