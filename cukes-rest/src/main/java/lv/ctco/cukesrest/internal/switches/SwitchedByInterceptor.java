@@ -1,6 +1,5 @@
 package lv.ctco.cukesrest.internal.switches;
 
-import com.google.common.base.Optional;
 import com.google.inject.*;
 import lv.ctco.cukesrest.internal.context.*;
 import org.aopalliance.intercept.*;

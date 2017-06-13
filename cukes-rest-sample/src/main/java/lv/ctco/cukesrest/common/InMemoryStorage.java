@@ -1,21 +1,20 @@
 package lv.ctco.cukesrest.common;
 
-import static lv.ctco.cukesrest.gadgets.dto.GadgetType.LAPTOP;
-import static lv.ctco.cukesrest.gadgets.dto.GadgetType.SMARTPHONE;
-import static lv.ctco.cukesrest.gadgets.dto.GadgetType.SMART_WATCH;
-import static lv.ctco.cukesrest.gadgets.dto.GadgetType.TABLET;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+import lv.ctco.cukesrest.gadgets.dto.GadgetDto;
+import lv.ctco.cukesrest.gadgets.dto.GadgetType;
+import lv.ctco.cukesrest.gadgets.dto.Owner;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-
-import lv.ctco.cukesrest.gadgets.dto.GadgetDto;
-import lv.ctco.cukesrest.gadgets.dto.GadgetType;
-import lv.ctco.cukesrest.gadgets.dto.Owner;
+import static lv.ctco.cukesrest.gadgets.dto.GadgetType.LAPTOP;
+import static lv.ctco.cukesrest.gadgets.dto.GadgetType.SMARTPHONE;
+import static lv.ctco.cukesrest.gadgets.dto.GadgetType.SMART_WATCH;
+import static lv.ctco.cukesrest.gadgets.dto.GadgetType.TABLET;
 
 @Singleton
 public class InMemoryStorage {
@@ -41,7 +40,7 @@ public class InMemoryStorage {
         gadget.setId(id);
         gadget.setType(type);
         gadget.setName(gadgetName);
-        gadget.setOwner(new Owner(name, "Simpson", age, Arrays.asList("Mr.Burns' slave")));
+        gadget.setOwner(new Owner(name, "Simpson", age, Collections.singletonList("Mr.Burns' slave")));
         gadget.setCreatedDate(new Date());
 
         this.gadgets.put(id, gadget);

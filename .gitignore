@@ -14,7 +14,3 @@
 # Misc
 .DS_Store
 *.swp
-
-# Migration
-.svn
-
