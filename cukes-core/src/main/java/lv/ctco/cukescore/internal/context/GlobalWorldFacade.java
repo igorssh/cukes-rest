@@ -1,11 +1,11 @@
 package lv.ctco.cukescore.internal.context;
 
-import com.google.common.base.*;
 import com.google.common.base.Optional;
-import com.google.common.collect.*;
-import com.google.inject.*;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 
-import java.util.*;
+import java.util.Set;
 
 public class GlobalWorldFacade {
 

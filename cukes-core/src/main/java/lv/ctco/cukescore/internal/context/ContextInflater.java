@@ -1,10 +1,11 @@
 package lv.ctco.cukescore.internal.context;
 
 import com.google.common.base.Optional;
-import com.google.inject.*;
-import lv.ctco.cukescore.*;
+import com.google.inject.Inject;
+import lv.ctco.cukescore.CukesOptions;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ContextInflater extends BaseContextHandler {
 

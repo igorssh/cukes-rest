@@ -1,8 +1,11 @@
 package lv.ctco.cukescore.internal.helpers;
 
-import java.io.*;
-import java.nio.charset.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.List;
 
 public class Files {
 

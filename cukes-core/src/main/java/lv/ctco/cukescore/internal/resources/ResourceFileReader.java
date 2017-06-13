@@ -1,12 +1,13 @@
 package lv.ctco.cukescore.internal.resources;
 
-import com.google.common.base.*;
-import com.google.inject.*;
-import lv.ctco.cukescore.*;
-import lv.ctco.cukescore.internal.helpers.*;
+import com.google.common.base.Joiner;
+import com.google.inject.Inject;
+import lv.ctco.cukescore.CukesRuntimeException;
+import lv.ctco.cukescore.internal.helpers.Files;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 public class ResourceFileReader {
 

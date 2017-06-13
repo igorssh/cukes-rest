@@ -1,9 +1,11 @@
 package lv.ctco.cukescore.internal.matchers;
 
-import lv.ctco.cukescore.internal.switches.*;
-import org.hamcrest.*;
+import lv.ctco.cukescore.internal.switches.ResponseWrapper;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 
-import static lv.ctco.cukescore.internal.matchers.JsonMatchers.*;
+import static lv.ctco.cukescore.internal.matchers.JsonMatchers.containsValueByPath;
 
 public class ResponseMatcher {
 

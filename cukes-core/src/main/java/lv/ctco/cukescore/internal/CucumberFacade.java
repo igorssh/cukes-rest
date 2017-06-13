@@ -1,10 +1,11 @@
 package lv.ctco.cukescore.internal;
 
-import com.google.inject.*;
-import lv.ctco.cukescore.*;
-import lv.ctco.cukescore.internal.context.*;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+import lv.ctco.cukescore.CukesRestPlugin;
+import lv.ctco.cukescore.internal.context.GlobalWorldFacade;
 
-import java.util.*;
+import java.util.Set;
 
 @Singleton
 public class CucumberFacade {

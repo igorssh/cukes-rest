@@ -1,7 +1,8 @@
 package lv.ctco.cukescore.internal.helpers;
 
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public enum TimeUnitDictionary {
     MILLISECONDS(TimeUnit.MILLISECONDS, "ms", "milli", "millisecond", "milliseconds"),

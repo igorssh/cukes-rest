@@ -1,8 +1,8 @@
 package lv.ctco.cukescore.internal;
 
-import lv.ctco.cukescore.internal.helpers.*;
-import lv.ctco.cukescore.internal.switches.*;
-import org.hamcrest.*;
+import lv.ctco.cukescore.internal.helpers.Time;
+import lv.ctco.cukescore.internal.switches.ResponseWrapper;
+import org.hamcrest.Matcher;
 
 public class AwaitCondition {
     private final Time waitTime;

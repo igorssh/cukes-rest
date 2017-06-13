@@ -1,20 +1,24 @@
 package lv.ctco.cukescore.internal;
 
 import com.google.common.base.Optional;
-import com.google.inject.*;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import io.restassured.http.Header;
 import io.restassured.http.Headers;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import lv.ctco.cukescore.*;
-import lv.ctco.cukescore.internal.context.*;
-import lv.ctco.cukescore.internal.matchers.*;
-import lv.ctco.cukescore.internal.switches.*;
+import lv.ctco.cukescore.CukesOptions;
+import lv.ctco.cukescore.CukesRestPlugin;
+import lv.ctco.cukescore.internal.context.GlobalWorldFacade;
+import lv.ctco.cukescore.internal.context.InflateContext;
+import lv.ctco.cukescore.internal.matchers.AwaitConditionMatcher;
+import lv.ctco.cukescore.internal.switches.ResponseWrapper;
 
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 
-import static com.jayway.awaitility.Awaitility.*;
+import static com.jayway.awaitility.Awaitility.with;
 
 @Singleton
 @InflateContext

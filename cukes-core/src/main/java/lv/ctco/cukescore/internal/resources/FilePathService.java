@@ -1,11 +1,11 @@
 package lv.ctco.cukescore.internal.resources;
 
-import com.google.inject.*;
-import lv.ctco.cukescore.*;
-import lv.ctco.cukescore.internal.context.*;
-import lv.ctco.cukescore.internal.helpers.*;
+import com.google.inject.Inject;
+import lv.ctco.cukescore.CukesOptions;
+import lv.ctco.cukescore.internal.context.GlobalWorldFacade;
+import lv.ctco.cukescore.internal.helpers.Files;
 
-import java.io.*;
+import java.io.File;
 
 public class FilePathService {
 

@@ -1,16 +1,21 @@
 package lv.ctco.cukescore.internal.context;
 
-import com.google.inject.*;
 import com.google.common.base.Optional;
-import lv.ctco.cukescore.*;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+import lv.ctco.cukescore.CukesRuntimeException;
 import lv.ctco.cukescore.internal.di.CukesGuiceModule;
 
-import java.io.*;
-import java.net.*;
-import java.util.*;
-import java.util.concurrent.*;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
-import static lv.ctco.cukescore.CukesOptions.*;
+import static lv.ctco.cukescore.CukesOptions.BASE_URI;
+import static lv.ctco.cukescore.CukesOptions.PROPERTIES_PREFIX;
+import static lv.ctco.cukescore.CukesOptions.RESOURCES_ROOT;
 
 @Singleton
 class GlobalWorld {

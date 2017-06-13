@@ -1,24 +1,31 @@
 package lv.ctco.cukescore.internal.di;
 
-import com.google.inject.*;
-import com.google.inject.matcher.*;
-import com.google.inject.multibindings.*;
-import lv.ctco.cukescore.*;
+import com.google.inject.AbstractModule;
+import com.google.inject.matcher.Matchers;
+import com.google.inject.multibindings.Multibinder;
+import lv.ctco.cukescore.CukesOptions;
+import lv.ctco.cukescore.CukesRestPlugin;
+import lv.ctco.cukescore.CukesRuntimeException;
 import lv.ctco.cukescore.internal.AssertionFacade;
 import lv.ctco.cukescore.internal.AssertionFacadeImpl;
 import lv.ctco.cukescore.internal.VariableFacade;
 import lv.ctco.cukescore.internal.VariableFacadeImpl;
-import lv.ctco.cukescore.internal.context.*;
+import lv.ctco.cukescore.internal.context.CaptureContext;
+import lv.ctco.cukescore.internal.context.CaptureContextInterceptor;
+import lv.ctco.cukescore.internal.context.GlobalWorld;
+import lv.ctco.cukescore.internal.context.InflateContext;
+import lv.ctco.cukescore.internal.context.InflateContextInterceptor;
 import lv.ctco.cukescore.internal.logging.HttpLoggingPlugin;
-import lv.ctco.cukescore.internal.switches.*;
-import org.aopalliance.intercept.*;
+import lv.ctco.cukescore.internal.switches.SwitchedBy;
+import lv.ctco.cukescore.internal.switches.SwitchedByInterceptor;
+import org.aopalliance.intercept.MethodInterceptor;
 
-import java.lang.annotation.*;
-import java.net.*;
-import java.util.*;
+import java.lang.annotation.Annotation;
+import java.net.URL;
+import java.util.Properties;
 
-import static lv.ctco.cukescore.internal.AssertionFacade.*;
-import static lv.ctco.cukescore.internal.VariableFacade.*;
+import static lv.ctco.cukescore.internal.AssertionFacade.ASSERTION_FACADE;
+import static lv.ctco.cukescore.internal.VariableFacade.VARIABLE_FACADE;
 
 public class CukesGuiceModule extends AbstractModule {
     @Override

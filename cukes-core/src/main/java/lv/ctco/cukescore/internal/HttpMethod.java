@@ -2,7 +2,7 @@ package lv.ctco.cukescore.internal;
 
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import lv.ctco.cukescore.*;
+import lv.ctco.cukescore.CukesRuntimeException;
 
 public enum HttpMethod {
     GET, POST, PUT, DELETE, OPTIONS, HEAD, PATCH;

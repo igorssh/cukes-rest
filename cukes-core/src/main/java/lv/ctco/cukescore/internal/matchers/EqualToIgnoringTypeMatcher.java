@@ -1,10 +1,10 @@
 package lv.ctco.cukescore.internal.matchers;
 
-import java.math.BigDecimal;
-
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+
+import java.math.BigDecimal;
 
 public class EqualToIgnoringTypeMatcher {
 

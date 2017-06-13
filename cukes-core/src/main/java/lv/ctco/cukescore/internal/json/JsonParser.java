@@ -1,10 +1,19 @@
 package lv.ctco.cukescore.internal.json;
 
-import com.google.gson.stream.*;
+import com.google.gson.stream.JsonToken;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-import static com.google.gson.stream.JsonToken.*;
+import static com.google.gson.stream.JsonToken.BEGIN_ARRAY;
+import static com.google.gson.stream.JsonToken.BEGIN_OBJECT;
+import static com.google.gson.stream.JsonToken.BOOLEAN;
+import static com.google.gson.stream.JsonToken.END_ARRAY;
+import static com.google.gson.stream.JsonToken.END_OBJECT;
+import static com.google.gson.stream.JsonToken.NAME;
+import static com.google.gson.stream.JsonToken.NULL;
+import static com.google.gson.stream.JsonToken.NUMBER;
+import static com.google.gson.stream.JsonToken.STRING;
 
 public class JsonParser {
 

@@ -1,9 +1,10 @@
 package lv.ctco.cukescore.internal.matchers;
 
-import cucumber.runtime.*;
-import lv.ctco.cukescore.internal.*;
-import lv.ctco.cukescore.internal.switches.*;
-import org.hamcrest.*;
+import cucumber.runtime.CucumberException;
+import lv.ctco.cukescore.internal.AwaitCondition;
+import lv.ctco.cukescore.internal.switches.ResponseWrapper;
+import org.hamcrest.Description;
+import org.hamcrest.TypeSafeMatcher;
 
 public class AwaitConditionMatcher extends TypeSafeMatcher<ResponseWrapper> {
 

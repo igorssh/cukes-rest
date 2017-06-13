@@ -25,7 +25,9 @@ import static com.google.common.collect.Collections2.transform;
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Sets.intersection;
 import static com.google.common.collect.Sets.newHashSet;
-import static lv.ctco.cukescore.CukesOptions.*;
+import static lv.ctco.cukescore.CukesOptions.LOGGING_LOGGER_NAME;
+import static lv.ctco.cukescore.CukesOptions.LOGGING_REQUEST_INCLUDES;
+import static lv.ctco.cukescore.CukesOptions.LOGGING_RESPONSE_INCLUDES;
 import static org.slf4j.LoggerFactory.getLogger;
 
 public class HttpLoggingPlugin implements CukesRestPlugin {

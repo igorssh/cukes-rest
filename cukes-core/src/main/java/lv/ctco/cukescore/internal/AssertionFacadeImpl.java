@@ -9,13 +9,26 @@ import lv.ctco.cukescore.CukesOptions;
 import lv.ctco.cukescore.internal.context.GlobalWorldFacade;
 import lv.ctco.cukescore.internal.context.InflateContext;
 import lv.ctco.cukescore.internal.json.JsonParser;
-import lv.ctco.cukescore.internal.matchers.*;
+import lv.ctco.cukescore.internal.matchers.ArrayWithSizeMatcher;
+import lv.ctco.cukescore.internal.matchers.ContainsPattern;
+import lv.ctco.cukescore.internal.matchers.EndsWithRegexp;
+import lv.ctco.cukescore.internal.matchers.EqualToIgnoringTypeMatcher;
+import lv.ctco.cukescore.internal.matchers.JsonMatchers;
+import lv.ctco.cukescore.internal.matchers.MiscMatchers;
+import lv.ctco.cukescore.internal.matchers.OfTypeMatcher;
+import lv.ctco.cukescore.internal.matchers.StatusCodeMatcher;
 import lv.ctco.cukescore.internal.switches.SwitchedBy;
 import org.hamcrest.Matchers;
 
 import java.util.Map;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.isEmptyOrNullString;
+import static org.hamcrest.Matchers.isEmptyString;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 @Singleton
