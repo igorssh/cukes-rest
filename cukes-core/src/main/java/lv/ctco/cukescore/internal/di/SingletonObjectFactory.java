@@ -1,4 +1,4 @@
-package lv.ctco.cukescore.di;
+package lv.ctco.cukescore.internal.di;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Guice;
@@ -8,8 +8,11 @@ import com.google.inject.Stage;
 import cucumber.api.guice.CucumberModules;
 import cucumber.api.java.ObjectFactory;
 import cucumber.runtime.java.guice.ScenarioScope;
-import lv.ctco.cukescore.internal.di.CukesGuiceModule;
+import lv.ctco.cukescore.CukesRuntimeException;
+import lv.ctco.cukescore.extension.CukesInjectableModule;
+import org.reflections.Reflections;
 
+import java.lang.reflect.Constructor;
 import java.util.Set;
 
 import static com.google.common.base.Preconditions.checkState;
@@ -63,9 +66,23 @@ public class SingletonObjectFactory implements ObjectFactory {
         MODULES.add(module);
     }
 
-    private static void lazyInitInjector() {
+    private void lazyInitInjector() {
+        addExternalModules();
         if (injector == null) {
             injector = Guice.createInjector(Stage.PRODUCTION, MODULES);
+        }
+    }
+
+    private void addExternalModules() {
+        Reflections reflections = new Reflections("lv.ctco.cukes");
+        for (Class targetClass : reflections.getTypesAnnotatedWith(CukesInjectableModule.class)) {
+            try {
+                Constructor<Module> constructor = targetClass.getConstructor();
+                Module module = constructor.newInstance();
+                addModule(module);
+            } catch (Exception e) {
+                throw new CukesRuntimeException("Unable to add External Module to Guice");
+            }
         }
     }
 

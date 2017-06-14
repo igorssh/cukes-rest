@@ -1,4 +1,4 @@
-package lv.ctco.cukescore;
+package lv.ctco.cukescore.extension;
 
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;

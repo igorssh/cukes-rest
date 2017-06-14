@@ -8,7 +8,7 @@ import io.restassured.http.Headers;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lv.ctco.cukescore.CukesOptions;
-import lv.ctco.cukescore.CukesRestPlugin;
+import lv.ctco.cukescore.extension.CukesRestPlugin;
 import lv.ctco.cukescore.internal.context.GlobalWorldFacade;
 import lv.ctco.cukescore.internal.context.InflateContext;
 import lv.ctco.cukescore.internal.matchers.AwaitConditionMatcher;
@@ -25,7 +25,7 @@ import static com.jayway.awaitility.Awaitility.with;
 public class ResponseFacade {
 
     @Inject
-    RequestSpecificationFacade specification;
+    RestRequestFacade specification;
     @Inject
     GlobalWorldFacade world;
     @Inject

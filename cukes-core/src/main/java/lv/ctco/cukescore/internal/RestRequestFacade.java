@@ -29,7 +29,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 @Singleton
 @InflateContext
-public class RequestSpecificationFacade {
+public class RestRequestFacade {
 
     @Inject
     private GlobalWorldFacade world;
@@ -41,7 +41,7 @@ public class RequestSpecificationFacade {
     private AwaitCondition awaitCondition;
 
     @Inject
-    public RequestSpecificationFacade(GlobalWorldFacade world) {
+    public RestRequestFacade(GlobalWorldFacade world) {
         this.world = world;
         initNewSpecification();
     }
@@ -198,9 +198,5 @@ public class RequestSpecificationFacade {
 
     public AwaitCondition awaitCondition() {
         return awaitCondition;
-    }
-
-    public void setAwaitCondition(AwaitCondition awaitCondition) {
-        this.awaitCondition = awaitCondition;
     }
 }

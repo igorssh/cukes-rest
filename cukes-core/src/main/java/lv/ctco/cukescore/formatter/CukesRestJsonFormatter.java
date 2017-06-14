@@ -4,7 +4,7 @@ import cucumber.runtime.formatter.CucumberJSONFormatter;
 import gherkin.formatter.Argument;
 import gherkin.formatter.JSONFormatter;
 import gherkin.formatter.model.Match;
-import lv.ctco.cukescore.di.SingletonObjectFactory;
+import lv.ctco.cukescore.internal.di.SingletonObjectFactory;
 import lv.ctco.cukescore.internal.context.ContextInflater;
 
 import java.lang.reflect.Method;

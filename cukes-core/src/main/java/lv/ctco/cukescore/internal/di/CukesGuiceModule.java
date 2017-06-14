@@ -4,12 +4,9 @@ import com.google.inject.AbstractModule;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.multibindings.Multibinder;
 import lv.ctco.cukescore.CukesOptions;
-import lv.ctco.cukescore.CukesRestPlugin;
 import lv.ctco.cukescore.CukesRuntimeException;
-import lv.ctco.cukescore.internal.AssertionFacade;
-import lv.ctco.cukescore.internal.AssertionFacadeImpl;
-import lv.ctco.cukescore.internal.VariableFacade;
-import lv.ctco.cukescore.internal.VariableFacadeImpl;
+import lv.ctco.cukescore.extension.CukesInjectableModule;
+import lv.ctco.cukescore.extension.CukesRestPlugin;
 import lv.ctco.cukescore.internal.context.CaptureContext;
 import lv.ctco.cukescore.internal.context.CaptureContextInterceptor;
 import lv.ctco.cukescore.internal.context.InflateContext;
@@ -23,10 +20,9 @@ import java.lang.annotation.Annotation;
 import java.net.URL;
 import java.util.Properties;
 
-import static lv.ctco.cukescore.internal.AssertionFacade.ASSERTION_FACADE;
-import static lv.ctco.cukescore.internal.VariableFacade.VARIABLE_FACADE;
 import static lv.ctco.cukescore.internal.helpers.Files.createCukesPropertyFileUrl;
 
+@CukesInjectableModule
 public class CukesGuiceModule extends AbstractModule {
 
     @Override
@@ -35,9 +31,6 @@ public class CukesGuiceModule extends AbstractModule {
         bindInterceptor(new CaptureContextInterceptor(), CaptureContext.class);
         bindInterceptor(new SwitchedByInterceptor(), SwitchedBy.class);
 
-        bindAlternative(ASSERTION_FACADE, AssertionFacade.class, AssertionFacadeImpl.class);
-        bindAlternative(VARIABLE_FACADE, VariableFacade.class, VariableFacadeImpl.class);
-
         bindPlugins();
     }
 
@@ -45,23 +38,6 @@ public class CukesGuiceModule extends AbstractModule {
         requestInjection(interceptor);
         bindInterceptor(Matchers.annotatedWith(annotationType), Matchers.any(), interceptor);
         bindInterceptor(Matchers.any(), Matchers.annotatedWith(annotationType), interceptor);
-    }
-
-    private <T, E extends T> void bindAlternative(String type, Class<T> clazz, Class<E> defaultClass) {
-        String alternativeType = System.getProperty(type);
-        Class<? extends T> targetClass;
-        if (alternativeType == null || alternativeType.isEmpty()) {
-            targetClass = defaultClass;
-        } else {
-            try {
-                targetClass = (Class<T>) Class.forName(alternativeType);
-            } catch (ClassNotFoundException e) {
-                throw new CukesRuntimeException("Invalid " + type + " value", e);
-            } catch (ClassCastException e) {
-                throw new CukesRuntimeException("Invalid " + type + " value", e);
-            }
-        }
-        bind(clazz).to(targetClass);
     }
 
     @SuppressWarnings("unchecked")

@@ -11,7 +11,7 @@ import io.restassured.response.ValidatableResponseLogSpec;
 import io.restassured.specification.FilterableRequestSpecification;
 import io.restassured.specification.RequestLogSpecification;
 import io.restassured.specification.RequestSpecification;
-import lv.ctco.cukescore.CukesRestPlugin;
+import lv.ctco.cukescore.extension.CukesRestPlugin;
 import lv.ctco.cukescore.internal.context.GlobalWorldFacade;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.event.Level;

@@ -3,6 +3,7 @@ package lv.ctco.cukescore.di;
 import com.google.inject.Binder;
 import com.google.inject.Module;
 import cucumber.api.guice.CucumberScopes;
+import lv.ctco.cukescore.internal.di.SingletonObjectFactory;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;

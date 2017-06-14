@@ -2,7 +2,7 @@ package lv.ctco.cukescore.internal;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import lv.ctco.cukescore.CukesRestPlugin;
+import lv.ctco.cukescore.extension.CukesRestPlugin;
 import lv.ctco.cukescore.internal.context.GlobalWorldFacade;
 
 import java.util.Set;
@@ -19,8 +19,6 @@ public class CucumberFacade {
     @Inject
     Set<CukesRestPlugin> pluginSet;
 
-    @Inject
-    RequestSpecificationFacade requestSpecificationFacade;
 
     public boolean firstScenario() {
         return firstRun;
@@ -50,7 +48,6 @@ public class CucumberFacade {
         for (CukesRestPlugin cukesRestPlugin : pluginSet) {
             cukesRestPlugin.afterScenario();
         }
-        requestSpecificationFacade.initNewSpecification();
     }
 
     public void afterAllTests() {

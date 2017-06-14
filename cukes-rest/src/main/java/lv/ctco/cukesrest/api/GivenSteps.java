@@ -5,7 +5,7 @@ import com.google.inject.Singleton;
 import cucumber.api.java.en.Given;
 import io.restassured.http.ContentType;
 import lv.ctco.cukescore.CukesOptions;
-import lv.ctco.cukescore.internal.RequestSpecificationFacade;
+import lv.ctco.cukescore.internal.RestRequestFacade;
 import lv.ctco.cukesrest.VariableFacade;
 import lv.ctco.cukescore.internal.context.GlobalWorldFacade;
 import lv.ctco.cukescore.internal.resources.ResourceFileReader;
@@ -14,7 +14,7 @@ import lv.ctco.cukescore.internal.resources.ResourceFileReader;
 public class GivenSteps {
 
     @Inject
-    RequestSpecificationFacade facade;
+    RestRequestFacade facade;
 
     @Inject
     VariableFacade variableFacade;

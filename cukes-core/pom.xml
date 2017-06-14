@@ -9,7 +9,7 @@
     <parent>
         <groupId>lv.ctco.cukesrest</groupId>
         <artifactId>cukes-rest-all</artifactId>
-        <version>0.2.25-SNAPSHOT</version>
+        <version>0.2.xxx</version>
     </parent>
 
     <properties>
@@ -120,6 +120,12 @@
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-guice</artifactId>
             <version>${cucumber.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.11</version>
         </dependency>
     </dependencies>
 
