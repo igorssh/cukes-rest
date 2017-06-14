@@ -60,7 +60,7 @@ The dependencies are stored in [Maven Central](http://search.maven.org/#search|g
 
 ```xml
 <dependency>
-    <groupId>lv.ctco.cukesrest</groupId>
+    <groupId>lv.ctco.cukescore</groupId>
     <artifactId>cukes-rest</artifactId>
     <version>${cukes-rest.version}</version>
 </dependency>
@@ -70,7 +70,7 @@ The dependencies are stored in [Maven Central](http://search.maven.org/#search|g
 
 ```xml
 <dependency>
-    <groupId>lv.ctco.cukesrest</groupId>
+    <groupId>lv.ctco.cukescore</groupId>
     <artifactId>cukes-rest-loadrunner</artifactId>
     <version>${cukes-rest.version}</version>
 </dependency>

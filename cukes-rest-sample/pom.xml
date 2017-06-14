@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>cukes-rest-sample</artifactId>
-    <name>cukes-rest-sample</name>
+    <name>Cukes Sample Project</name>
 
     <parent>
         <groupId>lv.ctco.cukesrest</groupId>
         <artifactId>cukes-rest-all</artifactId>
-        <version>0.2.xxx</version>
+        <version>0.2.25-SNAPSHOT</version>
     </parent>
 
     <build>
@@ -51,7 +51,7 @@
                                     <goal>java</goal>
                                 </goals>
                                 <configuration>
-                                    <mainClass>lv.ctco.cukesrest.SampleApplication</mainClass>
+                                    <mainClass>lv.ctco.cukescore.SampleApplication</mainClass>
                                     <arguments>
                                         <argument>server</argument>
                                         <argument>cukes-rest-sample\server.yml</argument>
@@ -67,12 +67,6 @@
 
     <dependencies>
         <!-- Cukes Dependencies-->
-        <dependency>
-            <groupId>lv.ctco.cukesrest</groupId>
-            <artifactId>cukes-rest</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
         <dependency>
             <groupId>lv.ctco.cukesrest</groupId>
             <artifactId>cukes-rest-loadrunner</artifactId>

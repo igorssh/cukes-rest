@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>cukes-rest-loadrunner</artifactId>
-    <name>cukes-rest-loadrunner</name>
+    <name>Cukes REST Loadrunner generator</name>
 
     <parent>
         <groupId>lv.ctco.cukesrest</groupId>
         <artifactId>cukes-rest-all</artifactId>
-        <version>0.2.xxx</version>
+        <version>0.2.25-SNAPSHOT</version>
     </parent>
 
     <build>

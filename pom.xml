@@ -4,8 +4,10 @@
 
     <groupId>lv.ctco.cukesrest</groupId>
     <artifactId>cukes-rest-all</artifactId>
-    <version>0.2.xxx</version>
+    <version>0.2.25-SNAPSHOT</version>
     <packaging>pom</packaging>
+
+    <name>Cukes</name>
 
     <modules>
         <module>cukes-core</module>
@@ -14,7 +16,6 @@
         <module>cukes-rest-sample</module>
     </modules>
 
-    <name>cukes-rest-all</name>
     <description>
         cukes-rest takes simplicity of Cucumber and provides bindings for HTTP specification.
         As a sugar on top, cukes-rest adds steps for storing and using request/response content from
