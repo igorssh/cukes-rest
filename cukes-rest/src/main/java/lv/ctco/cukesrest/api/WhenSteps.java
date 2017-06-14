@@ -3,7 +3,7 @@ package lv.ctco.cukesrest.api;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import cucumber.api.java.en.When;
-import lv.ctco.cukescore.internal.RestResponseFacade;
+import lv.ctco.cukesrest.facade.RestResponseFacade;
 
 @Singleton
 public class WhenSteps {

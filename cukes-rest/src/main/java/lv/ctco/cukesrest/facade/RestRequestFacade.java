@@ -1,4 +1,4 @@
-package lv.ctco.cukescore.internal;
+package lv.ctco.cukesrest.facade;
 
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
@@ -8,6 +8,7 @@ import io.restassured.path.json.config.JsonPathConfig;
 import io.restassured.specification.RequestSpecification;
 import lv.ctco.cukescore.CukesOptions;
 import lv.ctco.cukescore.CukesRuntimeException;
+import lv.ctco.cukescore.internal.AwaitCondition;
 import lv.ctco.cukescore.internal.context.GlobalWorldFacade;
 import lv.ctco.cukescore.internal.context.InflateContext;
 import lv.ctco.cukescore.internal.helpers.Time;

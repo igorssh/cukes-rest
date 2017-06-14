@@ -3,7 +3,7 @@ package lv.ctco.cukesrest.api;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import cucumber.api.java.en.Given;
-import lv.ctco.cukescore.internal.RestRequestFacade;
+import lv.ctco.cukesrest.facade.RestRequestFacade;
 import lv.ctco.cukescore.internal.helpers.Time;
 
 @Singleton

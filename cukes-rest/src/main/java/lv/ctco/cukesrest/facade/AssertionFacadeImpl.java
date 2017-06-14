@@ -6,7 +6,6 @@ import com.google.inject.Singleton;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
 import lv.ctco.cukescore.CukesOptions;
-import lv.ctco.cukescore.internal.RestResponseFacade;
 import lv.ctco.cukescore.internal.context.GlobalWorldFacade;
 import lv.ctco.cukescore.internal.context.InflateContext;
 import lv.ctco.cukescore.internal.json.JsonParser;
