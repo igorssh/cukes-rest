@@ -7,7 +7,7 @@ import io.restassured.http.ContentType;
 import lv.ctco.cukescore.CukesOptions;
 import lv.ctco.cukescore.internal.context.GlobalWorldFacade;
 import lv.ctco.cukescore.internal.resources.ResourceFileReader;
-import lv.ctco.cukesrest.VariableFacade;
+import lv.ctco.cukesrest.facade.RestVariableFacade;
 import lv.ctco.cukesrest.facade.RestRequestFacade;
 
 @Singleton
@@ -17,7 +17,7 @@ public class GivenSteps {
     RestRequestFacade facade;
 
     @Inject
-    VariableFacade variableFacade;
+    RestVariableFacade variableFacade;
 
     @Inject
     GlobalWorldFacade world;

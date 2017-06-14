@@ -1,6 +1,6 @@
-package lv.ctco.cukesrest;
+package lv.ctco.cukesrest.facade;
 
-public interface VariableFacade {
+public interface RestVariableFacade {
 
     void setVariable(String name, String value);
 

@@ -2,8 +2,10 @@ package lv.ctco.cukesrest;
 
 import com.google.inject.AbstractModule;
 import lv.ctco.cukescore.extension.CukesInjectableModule;
-import lv.ctco.cukesrest.facade.AssertionFacade;
-import lv.ctco.cukesrest.facade.AssertionFacadeImpl;
+import lv.ctco.cukesrest.facade.RestAssertionFacade;
+import lv.ctco.cukesrest.facade.RestAssertionFacadeImpl;
+import lv.ctco.cukesrest.facade.RestVariableFacade;
+import lv.ctco.cukesrest.facade.RestVariableFacadeImpl;
 
 import static lv.ctco.cukescore.CukesOptions.LOADRUNNER_FILTER_BLOCKS_REQUESTS;
 import static lv.ctco.cukescore.CukesOptions.PROPERTIES_PREFIX;
@@ -17,8 +19,8 @@ public class CukesRestGuiceModule extends AbstractModule {
 
         boolean isLoadRunnedEnabled = Boolean.valueOf(System.getProperty(PROPERTIES_PREFIX + LOADRUNNER_FILTER_BLOCKS_REQUESTS));
         if (!isLoadRunnedEnabled) {
-            bind(AssertionFacade.class).to(AssertionFacadeImpl.class);
-            bind(VariableFacade.class).to(VariableFacadeImpl.class);
+            bind(RestAssertionFacade.class).to(RestAssertionFacadeImpl.class);
+            bind(RestVariableFacade.class).to(RestVariableFacadeImpl.class);
         }
     }
 }
