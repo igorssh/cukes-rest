@@ -22,7 +22,7 @@ import static com.jayway.awaitility.Awaitility.with;
 
 @Singleton
 @InflateContext
-public class ResponseFacade {
+public class RestResponseFacade {
 
     @Inject
     RestRequestFacade specification;

@@ -5,7 +5,7 @@ import io.restassured.internal.ResponseParserRegistrar;
 import io.restassured.internal.RestAssuredResponseImpl;
 import io.restassured.internal.http.HttpResponseDecorator;
 import io.restassured.response.Response;
-import lv.ctco.cukescore.internal.ResponseFacade;
+import lv.ctco.cukescore.internal.RestResponseFacade;
 import lv.ctco.cukescore.internal.context.GlobalWorldFacade;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.http.ProtocolVersion;
@@ -35,7 +35,7 @@ public class AssertionFacadeImplTest extends IntegrationTestBase {
     @Test
     public void shouldNotInflateVarName() throws Exception {
         String headerName = "name";
-        ResponseFacade mock = mock(ResponseFacade.class);
+        RestResponseFacade mock = mock(RestResponseFacade.class);
         Response response = mock(Response.class);
         when(response.getHeader(anyString())).thenReturn(headerName);
         when(mock.response()).thenReturn(response);
@@ -53,7 +53,7 @@ public class AssertionFacadeImplTest extends IntegrationTestBase {
             "  \"error\": \"not found\"\n" +
             "}";
 
-        ResponseFacade mock = mock(ResponseFacade.class);
+        RestResponseFacade mock = mock(RestResponseFacade.class);
         when(mock.response()).thenReturn(generateResponse(
             "application/json",
             404,
@@ -78,7 +78,7 @@ public class AssertionFacadeImplTest extends IntegrationTestBase {
             "  \"error\": \"not found\"\n" +
             "}";
 
-        ResponseFacade mock = mock(ResponseFacade.class);
+        RestResponseFacade mock = mock(RestResponseFacade.class);
         when(mock.response()).thenReturn(generateResponse(
             "application/json",
             404,
@@ -102,7 +102,7 @@ public class AssertionFacadeImplTest extends IntegrationTestBase {
             "  \"error\": \"not found\"\n" +
             "}";
 
-        ResponseFacade mock = mock(ResponseFacade.class);
+        RestResponseFacade mock = mock(RestResponseFacade.class);
         when(mock.response()).thenReturn(generateResponse(
             "application/json",
             404,
@@ -124,7 +124,7 @@ public class AssertionFacadeImplTest extends IntegrationTestBase {
             "  \"error\": \"not found\"\n" +
             "}";
 
-        ResponseFacade mock = mock(ResponseFacade.class);
+        RestResponseFacade mock = mock(RestResponseFacade.class);
         when(mock.response()).thenReturn(generateResponse(
             "application/json",
             404,
@@ -145,7 +145,7 @@ public class AssertionFacadeImplTest extends IntegrationTestBase {
     public void shouldNotReturnBodyWhenEnabledButContentTypeOctet() {
         byte[] body = RandomUtils.nextBytes(20);
 
-        ResponseFacade mock = mock(ResponseFacade.class);
+        RestResponseFacade mock = mock(RestResponseFacade.class);
         when(mock.response()).thenReturn(generateResponse(
             "application/octet-stream",
             404,
