@@ -34,7 +34,7 @@ import static org.junit.Assert.assertThat;
 @Singleton
 @SwitchedBy(CukesOptions.ASSERTIONS_DISABLED)
 @InflateContext
-public class AssertionFacadeImpl implements AssertionFacade {
+public class RestAssertionFacadeImpl implements RestAssertionFacade {
 
     @Inject
     private GlobalWorldFacade world;

@@ -26,10 +26,10 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class AssertionFacadeImplTest extends IntegrationTestBase {
+public class RestAssertionFacadeImplTest extends IntegrationTestBase {
 
 
-    AssertionFacade facade = getObjectFactory().getInstance(AssertionFacadeImpl.class);
+    RestAssertionFacade facade = getObjectFactory().getInstance(RestAssertionFacadeImpl.class);
 
     GlobalWorldFacade world = getObjectFactory().getInstance(GlobalWorldFacade.class);
 
@@ -40,7 +40,7 @@ public class AssertionFacadeImplTest extends IntegrationTestBase {
         Response response = mock(Response.class);
         when(response.getHeader(anyString())).thenReturn(headerName);
         when(mock.response()).thenReturn(response);
-        ((AssertionFacadeImpl) facade).facade = mock;
+        ((RestAssertionFacadeImpl) facade).facade = mock;
 
         world.put("id", "1");
         facade.varAssignedFromHeader("{(id)}", headerName);
@@ -60,7 +60,7 @@ public class AssertionFacadeImplTest extends IntegrationTestBase {
             404,
             body.getBytes()));
 
-        ((AssertionFacadeImpl) facade).facade = mock;
+        ((RestAssertionFacadeImpl) facade).facade = mock;
         world.put(ASSERTS_STATUS_CODE_DISPLAY_BODY, "true");
         world.put(ASSERTS_STATUS_CODE_MAX_SIZE, "100");
 
@@ -85,7 +85,7 @@ public class AssertionFacadeImplTest extends IntegrationTestBase {
             404,
             body.getBytes()));
 
-        ((AssertionFacadeImpl) facade).facade = mock;
+        ((RestAssertionFacadeImpl) facade).facade = mock;
         world.put(ASSERTS_STATUS_CODE_DISPLAY_BODY, "true");
 
         validateException(
@@ -109,7 +109,7 @@ public class AssertionFacadeImplTest extends IntegrationTestBase {
             404,
             body.getBytes()));
 
-        ((AssertionFacadeImpl) facade).facade = mock;
+        ((RestAssertionFacadeImpl) facade).facade = mock;
         world.put(ASSERTS_STATUS_CODE_DISPLAY_BODY, "false");
         world.put(ASSERTS_STATUS_CODE_MAX_SIZE, "100");
 
@@ -131,7 +131,7 @@ public class AssertionFacadeImplTest extends IntegrationTestBase {
             404,
             body.getBytes()));
 
-        ((AssertionFacadeImpl) facade).facade = mock;
+        ((RestAssertionFacadeImpl) facade).facade = mock;
         world.put(ASSERTS_STATUS_CODE_DISPLAY_BODY, "true");
         world.put(ASSERTS_STATUS_CODE_MAX_SIZE, "5");
 
@@ -152,7 +152,7 @@ public class AssertionFacadeImplTest extends IntegrationTestBase {
             404,
             body));
 
-        ((AssertionFacadeImpl) facade).facade = mock;
+        ((RestAssertionFacadeImpl) facade).facade = mock;
         world.put(ASSERTS_STATUS_CODE_DISPLAY_BODY, "true");
         world.put(ASSERTS_STATUS_CODE_MAX_SIZE, "5000");
 

@@ -1,6 +1,6 @@
 package lv.ctco.cukesrest.facade;
 
-public interface AssertionFacade {
+public interface RestAssertionFacade {
 
     void bodyEqualTo(String body);
 
