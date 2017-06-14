@@ -1,0 +1,9 @@
+{
+    allPeople {
+        totalCount
+        people {
+            name
+            birthYear
+        }
+    }
+}
