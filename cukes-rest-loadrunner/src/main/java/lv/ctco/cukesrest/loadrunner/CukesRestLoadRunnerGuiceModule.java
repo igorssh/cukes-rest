@@ -2,7 +2,7 @@ package lv.ctco.cukesrest.loadrunner;
 
 import com.google.inject.AbstractModule;
 import lv.ctco.cukescore.extension.CukesInjectableModule;
-import lv.ctco.cukescore.internal.AssertionFacade;
+import lv.ctco.cukesrest.facade.AssertionFacade;
 import lv.ctco.cukesrest.VariableFacade;
 
 import static lv.ctco.cukescore.CukesOptions.LOADRUNNER_FILTER_BLOCKS_REQUESTS;

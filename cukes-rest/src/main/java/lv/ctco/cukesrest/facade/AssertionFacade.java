@@ -1,7 +1,6 @@
-package lv.ctco.cukescore.internal;
+package lv.ctco.cukesrest.facade;
 
 public interface AssertionFacade {
-    String ASSERTION_FACADE = "AssertionFacade";
 
     void bodyEqualTo(String body);
 

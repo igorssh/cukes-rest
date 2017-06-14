@@ -25,10 +25,6 @@ public class ContainsPattern extends BaseMatcher<CharSequence> {
         this(Pattern.compile(Strings.escapeRegex(regex)), match);
     }
 
-    public ContainsPattern(String regex) {
-        this(Pattern.compile(regex));
-    }
-
     @Override
     public void describeTo(Description description) {
         description.appendText("a string ")
@@ -40,10 +36,6 @@ public class ContainsPattern extends BaseMatcher<CharSequence> {
 
     public static Matcher<CharSequence> containsPattern(String regex) {
         return new ContainsPattern(regex, false);
-    }
-
-    public static Matcher<CharSequence> containsPattern(Pattern p) {
-        return new ContainsPattern(p, false);
     }
 
     public static Matcher<CharSequence> matchesPattern(String regex) {

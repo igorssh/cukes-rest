@@ -8,10 +8,6 @@ import java.math.BigDecimal;
 
 public class EqualToIgnoringTypeMatcher {
 
-    public static Matcher<String> equalToIgnoringType(final String value) {
-        return equalToIgnoringType(value, false);
-    }
-
     public static Matcher<String> equalToIgnoringType(final String value, final boolean caseInsensitive) {
         return new BaseMatcher<String>() {
 

@@ -3,7 +3,7 @@ package lv.ctco.cukesrest.api;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import cucumber.api.java.en.Then;
-import lv.ctco.cukescore.internal.AssertionFacade;
+import lv.ctco.cukesrest.facade.AssertionFacade;
 import lv.ctco.cukescore.internal.resources.ResourceFileReader;
 
 @Singleton
