@@ -5,7 +5,6 @@ import com.google.inject.matcher.Matchers;
 import com.google.inject.multibindings.Multibinder;
 import lv.ctco.cukescore.CukesOptions;
 import lv.ctco.cukescore.CukesRuntimeException;
-import lv.ctco.cukescore.extension.CukesInjectableModule;
 import lv.ctco.cukescore.extension.CukesRestPlugin;
 import lv.ctco.cukescore.internal.context.CaptureContext;
 import lv.ctco.cukescore.internal.context.CaptureContextInterceptor;
@@ -22,7 +21,6 @@ import java.util.Properties;
 
 import static lv.ctco.cukescore.internal.helpers.Files.createCukesPropertyFileUrl;
 
-@CukesInjectableModule
 public class CukesGuiceModule extends AbstractModule {
 
     @Override

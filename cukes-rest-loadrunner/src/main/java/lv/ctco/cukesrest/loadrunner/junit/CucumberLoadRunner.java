@@ -13,9 +13,7 @@ import cucumber.runtime.junit.JUnitOptions;
 import cucumber.runtime.junit.JUnitReporter;
 import cucumber.runtime.model.CucumberFeature;
 import lv.ctco.cukescore.internal.di.SingletonObjectFactory;
-import lv.ctco.cukesrest.loadrunner.AssertionFacadeLoadRunnerImpl;
 import lv.ctco.cukesrest.loadrunner.LoadRunnerFilter;
-import lv.ctco.cukesrest.loadrunner.VariableFacadeLoadRunnerImpl;
 import org.junit.runner.Description;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.ParentRunner;
@@ -26,11 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static lv.ctco.cukescore.CukesOptions.ASSERTIONS_DISABLED;
-import static lv.ctco.cukescore.CukesOptions.COMPONENT_PREFIX;
 import static lv.ctco.cukescore.CukesOptions.CONTEXT_INFLATING_ENABLED;
 import static lv.ctco.cukescore.CukesOptions.LOADRUNNER_FILTER_BLOCKS_REQUESTS;
-import static lv.ctco.cukescore.internal.AssertionFacade.ASSERTION_FACADE;
-import static lv.ctco.cukesrest.VariableFacade.VARIABLE_FACADE;
 
 public class CucumberLoadRunner extends ParentRunner<FeatureRunner> {
     private final JUnitReporter jUnitReporter;
@@ -51,8 +46,6 @@ public class CucumberLoadRunner extends ParentRunner<FeatureRunner> {
         System.setProperty(cukesProperty(CONTEXT_INFLATING_ENABLED), "false");
         System.setProperty(cukesProperty(ASSERTIONS_DISABLED), "true");
         System.setProperty(cukesProperty(LOADRUNNER_FILTER_BLOCKS_REQUESTS), "true");
-        System.setProperty(COMPONENT_PREFIX + ASSERTION_FACADE, AssertionFacadeLoadRunnerImpl.class.getCanonicalName());
-        System.setProperty(COMPONENT_PREFIX + VARIABLE_FACADE, VariableFacadeLoadRunnerImpl.class.getCanonicalName());
 
         filter = SingletonObjectFactory.instance().getInstance(LoadRunnerFilter.class);
 

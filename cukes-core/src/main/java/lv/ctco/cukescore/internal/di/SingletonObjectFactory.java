@@ -67,8 +67,8 @@ public class SingletonObjectFactory implements ObjectFactory {
     }
 
     private void lazyInitInjector() {
-        addExternalModules();
         if (injector == null) {
+            addExternalModules();
             injector = Guice.createInjector(Stage.PRODUCTION, MODULES);
         }
     }
