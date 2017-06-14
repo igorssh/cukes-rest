@@ -6,6 +6,7 @@ import io.restassured.internal.RestAssuredResponseImpl;
 import io.restassured.internal.http.HttpResponseDecorator;
 import io.restassured.response.Response;
 import lv.ctco.cukescore.internal.context.GlobalWorldFacade;
+import lv.ctco.cukesrest.IntegrationTestBase;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.http.ProtocolVersion;
 import org.apache.http.impl.EnglishReasonPhraseCatalog;

@@ -1,4 +1,4 @@
-package lv.ctco.cukescore.internal;
+package lv.ctco.cukesrest;
 
 import cucumber.api.java.ObjectFactory;
 import lv.ctco.cukescore.internal.di.SingletonObjectFactory;
