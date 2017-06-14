@@ -1,4 +1,4 @@
-package lv.ctco.cukescore.facade;
+package lv.ctco.cukesrest.facade;
 
 import com.google.common.base.Optional;
 import io.restassured.internal.ResponseParserRegistrar;
@@ -6,7 +6,7 @@ import io.restassured.internal.RestAssuredResponseImpl;
 import io.restassured.internal.http.HttpResponseDecorator;
 import io.restassured.response.Response;
 import lv.ctco.cukescore.internal.context.GlobalWorldFacade;
-import lv.ctco.cukescore.IntegrationTestBase;
+import lv.ctco.cukesrest.IntegrationTestBase;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.http.ProtocolVersion;
 import org.apache.http.impl.EnglishReasonPhraseCatalog;
@@ -18,7 +18,7 @@ import java.util.Locale;
 
 import static lv.ctco.cukescore.CukesOptions.ASSERTS_STATUS_CODE_DISPLAY_BODY;
 import static lv.ctco.cukescore.CukesOptions.ASSERTS_STATUS_CODE_MAX_SIZE;
-import static lv.ctco.cukescore.CustomMatchers.equalToOptional;
+import static lv.ctco.cukesrest.CustomMatchers.equalToOptional;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -27,6 +27,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class AssertionFacadeImplTest extends IntegrationTestBase {
+
 
     AssertionFacade facade = getObjectFactory().getInstance(AssertionFacadeImpl.class);
 

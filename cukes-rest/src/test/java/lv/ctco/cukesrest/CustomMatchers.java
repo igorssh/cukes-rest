@@ -1,4 +1,4 @@
-package lv.ctco.cukescore;
+package lv.ctco.cukesrest;
 
 import com.google.common.base.Optional;
 import org.hamcrest.Description;

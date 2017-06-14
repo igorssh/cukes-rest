@@ -1,14 +1,14 @@
-package lv.ctco.cukescore.api;
+package lv.ctco.cukesrest.api;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import cucumber.api.java.en.Given;
 import io.restassured.http.ContentType;
 import lv.ctco.cukescore.CukesOptions;
-import lv.ctco.cukescore.facade.RestRequestFacade;
-import lv.ctco.cukescore.VariableFacade;
 import lv.ctco.cukescore.internal.context.GlobalWorldFacade;
 import lv.ctco.cukescore.internal.resources.ResourceFileReader;
+import lv.ctco.cukesrest.VariableFacade;
+import lv.ctco.cukesrest.facade.RestRequestFacade;
 
 @Singleton
 public class GivenSteps {

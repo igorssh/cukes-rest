@@ -3,8 +3,8 @@ package lv.ctco.cukescore.loadrunner;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import lv.ctco.cukescore.internal.context.InflateContext;
-import lv.ctco.cukescore.VariableFacade;
 import lv.ctco.cukescore.loadrunner.function.LoadRunnerFunction;
+import lv.ctco.cukesrest.VariableFacade;
 
 @Singleton
 @InflateContext

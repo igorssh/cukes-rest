@@ -1,4 +1,4 @@
-package lv.ctco.cukescore.facade;
+package lv.ctco.cukesrest.facade;
 
 public interface AssertionFacade {
 

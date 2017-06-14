@@ -1,8 +1,8 @@
-package lv.ctco.cukescore;
+package lv.ctco.cukesrest;
 
 import com.google.inject.Inject;
 import cucumber.api.java.After;
-import lv.ctco.cukescore.facade.RestRequestFacade;
+import lv.ctco.cukesrest.facade.RestRequestFacade;
 
 public class CukesRestHooks {
 

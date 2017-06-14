@@ -1,12 +1,13 @@
-package lv.ctco.cukescore;
+package lv.ctco.cukesrest;
 
 import com.google.inject.AbstractModule;
 import lv.ctco.cukescore.extension.CukesInjectableModule;
-import lv.ctco.cukescore.facade.AssertionFacade;
-import lv.ctco.cukescore.facade.AssertionFacadeImpl;
+import lv.ctco.cukesrest.facade.AssertionFacade;
+import lv.ctco.cukesrest.facade.AssertionFacadeImpl;
 
 import static lv.ctco.cukescore.CukesOptions.LOADRUNNER_FILTER_BLOCKS_REQUESTS;
 import static lv.ctco.cukescore.CukesOptions.PROPERTIES_PREFIX;
+
 
 @CukesInjectableModule
 public class CukesRestGuiceModule extends AbstractModule {

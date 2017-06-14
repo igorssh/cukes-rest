@@ -1,8 +1,6 @@
-package lv.ctco.cukescore;
+package lv.ctco.cukesrest;
 
 public interface VariableFacade {
-
-    String VARIABLE_FACADE = "VariableFacade";
 
     void setVariable(String name, String value);
 

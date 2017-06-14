@@ -1,4 +1,4 @@
-package lv.ctco.cukescore.facade;
+package lv.ctco.cukesrest.facade;
 
 import com.google.common.base.Function;
 import com.google.inject.Inject;
