@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright Swiss Reinsurance Company, Mythenquai 50/60, CH 8022 Zurich. All rights reserved.
+  -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cukes-rest-sample</artifactId>
-    <name>Cukes REST Sample Project</name>
+    <artifactId>cukes-graphql-sample</artifactId>
+    <name>Cukes GraphQL Sample Project</name>
 
     <parent>
         <groupId>lv.ctco.cukesrest</groupId>
@@ -51,10 +55,10 @@
                                     <goal>java</goal>
                                 </goals>
                                 <configuration>
-                                    <mainClass>lv.ctco.cukesrest.SampleApplication</mainClass>
+                                    <mainClass>lv.ctco.cukesgraphql.SampleApplication</mainClass>
                                     <arguments>
                                         <argument>server</argument>
-                                        <argument>cukes-rest-sample\server.yml</argument>
+                                        <argument>cukes-rest-graphql\server.yml</argument>
                                     </arguments>
                                 </configuration>
                             </execution>
@@ -69,7 +73,7 @@
         <!-- Cukes Dependencies-->
         <dependency>
             <groupId>lv.ctco.cukesrest</groupId>
-            <artifactId>cukes-rest-loadrunner</artifactId>
+            <artifactId>cukes-graphql</artifactId>
             <version>${project.version}</version>
         </dependency>
 
