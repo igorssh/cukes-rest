@@ -1,4 +1,4 @@
-package lv.ctco.cukesrest.facade;
+package lv.ctco.cukesgraphql.facade;
 
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
@@ -30,7 +30,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 @Singleton
 @InflateContext
-public class RestRequestFacade {
+public class GQLRequestFacade {
 
     @Inject
     private GlobalWorldFacade world;
@@ -42,7 +42,7 @@ public class RestRequestFacade {
     private AwaitCondition awaitCondition;
 
     @Inject
-    public RestRequestFacade(GlobalWorldFacade world) {
+    public GQLRequestFacade(GlobalWorldFacade world) {
         this.world = world;
         initNewSpecification();
     }
