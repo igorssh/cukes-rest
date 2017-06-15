@@ -16,6 +16,11 @@ public enum HttpMethod {
         throw new IllegalArgumentException();
     }
 
+
+    public Response doRequest(RequestSpecification when) {
+        return doRequest(when, "");
+    }
+
     public Response doRequest(RequestSpecification when, String url) {
         switch (this) {
             case GET: return when.get(url);

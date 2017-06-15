@@ -5,6 +5,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import io.restassured.config.RestAssuredConfig;
+import io.restassured.config.SSLConfig;
 import io.restassured.path.json.config.JsonPathConfig;
 import lv.ctco.cukescore.CukesOptions;
 
@@ -68,6 +69,7 @@ public class GlobalWorldFacade {
         if (!getBoolean(CukesOptions.GZIP_SUPPORT, true)) {
             config.decoderConfig(decoderConfig().contentDecoders(DEFLATE));
         }
+        config.sslConfig(new SSLConfig().allowAllHostnames());
         return config;
     }
 

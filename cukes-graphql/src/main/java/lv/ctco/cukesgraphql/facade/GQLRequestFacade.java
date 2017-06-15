@@ -10,6 +10,7 @@ import lv.ctco.cukescore.CukesRuntimeException;
 import lv.ctco.cukescore.internal.context.GlobalWorldFacade;
 import lv.ctco.cukescore.internal.context.InflateContext;
 import lv.ctco.cukescore.internal.https.TrustAllTrustManager;
+import lv.ctco.cukesgraphql.internal.GraphQLRequest;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
@@ -24,6 +25,8 @@ public class GQLRequestFacade {
     private GlobalWorldFacade world;
 
     private RequestSpecification specification;
+
+    private GraphQLRequest graphQLRequest = new GraphQLRequest();
 
     @Inject
     public GQLRequestFacade(GlobalWorldFacade world) {
@@ -59,10 +62,6 @@ public class GQLRequestFacade {
         }
     }
 
-    public void param(String key, Object value) {
-        specification.param(key, value);
-    }
-
     public void queryParam(String parameterName, String parameterValue) {
         try {
             parameterValue = URLEncoder.encode(parameterValue, "UTF-8");
@@ -85,57 +84,23 @@ public class GQLRequestFacade {
         specification.contentType(contentType);
     }
 
-    public void formParam(String parameterName, String parameterValue) {
-        specification.formParam(parameterName, parameterValue);
-    }
-
     public void cookie(String cookieName, String cookieValue) {
         specification.cookie(cookieName, cookieValue);
     }
 
-    public void header(String headerName, String headerValue) {
-        specification.header(headerName, headerValue);
+    public void queryBody(String body) {
+        graphQLRequest.setQuery(body);
     }
 
-    public void multiPart(String contentBody, String controlName) {
-        specification.multiPart(controlName, contentBody);
-    }
-
-    public void multiPart(String contentBody, String controlName, String mimeType) {
-        specification.multiPart(controlName, contentBody, mimeType);
-    }
-
-    public void proxy(String scheme, String host, Integer port) {
-        if (port == null) port = 80;
-        specification.proxy(host, port, scheme);
-    }
-
-    public void sessionId(String sessionIdValue) {
-        specification.sessionId(sessionIdValue);
-    }
-
-    public void sessionId(String sessionIdName, String sessionIdValue) {
-        specification.sessionId(sessionIdName, sessionIdValue);
-    }
-
-    public void body(String body) {
-        specification.body(body);
-    }
-
-    public void authentication(String username, String password) {
-        world.put(CukesOptions.USERNAME, username);
-        world.put(CukesOptions.PASSWORD, password);
-    }
-
-    public void basicAuthentication(String username, String password) {
-        specification.auth().basic(username, password);
-    }
-
-    public void authenticationType(String authenticationType) {
-        world.put(CukesOptions.AUTH_TYPE, authenticationType);
+    public void body(GraphQLRequest request) {
+        specification.body(request);
     }
 
     public RequestSpecification value() {
         return specification;
+    }
+
+    public GraphQLRequest getGraphQLRequest() {
+        return graphQLRequest;
     }
 }

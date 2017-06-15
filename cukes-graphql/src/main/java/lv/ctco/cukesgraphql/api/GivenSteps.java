@@ -22,7 +22,7 @@ public class GivenSteps {
     @Given("^query from file \"(.+)\"$")
     public void request_Body_From_File(String path) {
         String body = this.fileReader.read(path);
-        this.requestFacade.body(body);
+        this.requestFacade.queryBody(body);
     }
 
 }

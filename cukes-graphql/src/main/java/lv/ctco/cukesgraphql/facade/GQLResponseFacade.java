@@ -21,7 +21,7 @@ import java.util.concurrent.Callable;
 public class GQLResponseFacade {
 
     @Inject
-    GQLRequestFacade specification;
+    GQLRequestFacade requestFacade;
 
     @Inject
     GlobalWorldFacade world;
@@ -32,21 +32,23 @@ public class GQLResponseFacade {
     private Response response;
 
     public void doRequest() throws Exception {
+        requestFacade.body(requestFacade.getGraphQLRequest());
         doRequest(HttpMethod.POST).call();
-        specification.initNewSpecification();
+
+        requestFacade.initNewSpecification();
     }
 
     private Callable<ResponseWrapper> doRequest(final HttpMethod method) {
         return new Callable<ResponseWrapper>() {
             @Override
             public ResponseWrapper call() throws Exception {
-                final RequestSpecification requestSpec = specification.value();
+                final RequestSpecification requestSpec = requestFacade.value();
 
                 for (CukesRestPlugin cukesRestPlugin : pluginSet) {
                     cukesRestPlugin.beforeRequest(requestSpec);
                 }
 
-                response = method.doRequest(requestSpec, "");
+                response = method.doRequest(requestSpec);
 
                 System.out.println(response.asString());
 
