@@ -13,16 +13,16 @@ public class ThenSteps {
 
     @Then("^response contains property \"(.+)\" with value \"(.*)\"$")
     public void response_Body_Contains_Property(String path, String value) {
-//        this.assertionFacade.bodyContainsPathWithValue(path, value);
+        this.assertionFacade.responseContainsPropertyWithValue(path, value);
     }
 
     @Then("^response contains an array \"(.+)\" of size (>=|>|<=|<|<>) (\\d+)$")
     public void response_Body_Contains_Array_With_Operator_Size(String path, String operator, Integer size) {
-//        this.assertionFacade.bodyContainsArrayWithSize(path, operator + size);
+        this.assertionFacade.bodyContainsArrayWithSize(path, operator + size);
     }
 
     @Then("^response contains an array \"(.+)\" of size (\\d+)$")
     public void response_Body_Contains_Array_With_Size(String path, Integer size) {
-//        this.assertionFacade.bodyContainsArrayWithSize(path, size.toString());
+        this.assertionFacade.bodyContainsArrayWithSize(path, size.toString());
     }
 }

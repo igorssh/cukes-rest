@@ -50,8 +50,6 @@ public class GQLResponseFacade {
 
                 response = method.doRequest(requestSpec);
 
-                System.out.println(response.asString());
-
                 for (CukesRestPlugin cukesRestPlugin : pluginSet) {
                     cukesRestPlugin.afterRequest(response);
                 }
@@ -77,4 +75,7 @@ public class GQLResponseFacade {
         }
     }
 
+    public Response response() {
+        return response;
+    }
 }
