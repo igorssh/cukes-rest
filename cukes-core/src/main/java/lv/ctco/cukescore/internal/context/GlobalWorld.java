@@ -19,6 +19,7 @@ import static lv.ctco.cukescore.internal.helpers.Files.createCukesPropertyFileUr
 
 @Singleton
 public class GlobalWorld {
+
     private Map<String, String> context;
 
     @Inject

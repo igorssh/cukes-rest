@@ -4,7 +4,6 @@ import com.google.common.base.Optional;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import io.restassured.RestAssured;
-import io.restassured.path.json.config.JsonPathConfig;
 import io.restassured.specification.RequestSpecification;
 import lv.ctco.cukescore.CukesOptions;
 import lv.ctco.cukescore.CukesRuntimeException;
@@ -21,7 +20,6 @@ import java.net.URLEncoder;
 
 import static io.restassured.config.DecoderConfig.ContentDecoder.DEFLATE;
 import static io.restassured.config.DecoderConfig.decoderConfig;
-import static io.restassured.config.JsonConfig.jsonConfig;
 import static io.restassured.config.RestAssuredConfig.newConfig;
 import static lv.ctco.cukescore.internal.matchers.ResponseMatcher.aHeader;
 import static lv.ctco.cukescore.internal.matchers.ResponseMatcher.aProperty;
@@ -35,10 +33,8 @@ public class RestRequestFacade {
     @Inject
     private GlobalWorldFacade world;
 
-    /* Mutable Builder */
     private RequestSpecification specification;
 
-    // TODO: Refactor
     private AwaitCondition awaitCondition;
 
     @Inject
@@ -48,7 +44,6 @@ public class RestRequestFacade {
     }
 
     private void onCreate() {
-        // TODO: Refactor
         Optional<String> $baseUri = world.get(CukesOptions.BASE_URI);
         if ($baseUri.isPresent()) {
             baseUri($baseUri.get());
@@ -69,7 +64,6 @@ public class RestRequestFacade {
 
         boolean relaxedHttps = world.getBoolean(CukesOptions.RELAXED_HTTPS);
         if (relaxedHttps) {
-            // TODO: Leak is present. Should have an ability to disable functionality
             specification.relaxedHTTPSValidation();
             TrustAllTrustManager.trustAllHttpsCertificates();
         }
@@ -161,11 +155,9 @@ public class RestRequestFacade {
 
     public void initNewSpecification() {
         try {
-            // TODO: Somehow this should be configurable
-            specification = RestAssured.given()
-                .config(newConfig()
-                    .jsonConfig(jsonConfig().numberReturnType(JsonPathConfig.NumberReturnType.BIG_DECIMAL)));
-
+            specification = RestAssured
+                .given()
+                .config(world.getRestAssuredConfig());
             awaitCondition = null;
             onCreate();
         } catch (Exception e) {

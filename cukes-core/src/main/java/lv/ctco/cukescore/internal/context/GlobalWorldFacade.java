@@ -4,13 +4,23 @@ import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import io.restassured.config.RestAssuredConfig;
+import io.restassured.path.json.config.JsonPathConfig;
+import lv.ctco.cukescore.CukesOptions;
 
 import java.util.Set;
+
+import static io.restassured.config.DecoderConfig.ContentDecoder.DEFLATE;
+import static io.restassured.config.DecoderConfig.decoderConfig;
+import static io.restassured.config.JsonConfig.jsonConfig;
+import static io.restassured.config.RestAssuredConfig.newConfig;
 
 public class GlobalWorldFacade {
 
     @Inject
     GlobalWorld world;
+
+    private RestAssuredConfig restAssuredConfig;
 
     @CaptureContext
     public void put(@CaptureContext.Pattern String key, @CaptureContext.Value String value) {
@@ -36,6 +46,7 @@ public class GlobalWorldFacade {
 
     public void reconstruct() {
         world.reconstruct();
+        buildRestAssuredConfig();
     }
 
     public Set<String> getKeysStartingWith(final String headerPrefix) {
@@ -50,5 +61,20 @@ public class GlobalWorldFacade {
 
     public void remove(String key) {
         world.remove(key);
+    }
+
+    private RestAssuredConfig buildRestAssuredConfig() {
+        RestAssuredConfig config = newConfig().jsonConfig(jsonConfig().numberReturnType(JsonPathConfig.NumberReturnType.BIG_DECIMAL));
+        if (!getBoolean(CukesOptions.GZIP_SUPPORT, true)) {
+            config.decoderConfig(decoderConfig().contentDecoders(DEFLATE));
+        }
+        return config;
+    }
+
+    public RestAssuredConfig getRestAssuredConfig() {
+        if (restAssuredConfig == null) {
+            restAssuredConfig = buildRestAssuredConfig();
+        }
+        return restAssuredConfig;
     }
 }

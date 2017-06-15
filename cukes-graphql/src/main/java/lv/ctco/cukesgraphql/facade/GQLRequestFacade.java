@@ -4,29 +4,17 @@ import com.google.common.base.Optional;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import io.restassured.RestAssured;
-import io.restassured.path.json.config.JsonPathConfig;
 import io.restassured.specification.RequestSpecification;
 import lv.ctco.cukescore.CukesOptions;
 import lv.ctco.cukescore.CukesRuntimeException;
-import lv.ctco.cukescore.internal.AwaitCondition;
 import lv.ctco.cukescore.internal.context.GlobalWorldFacade;
 import lv.ctco.cukescore.internal.context.InflateContext;
-import lv.ctco.cukescore.internal.helpers.Time;
 import lv.ctco.cukescore.internal.https.TrustAllTrustManager;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
-
-import static io.restassured.config.DecoderConfig.ContentDecoder.DEFLATE;
-import static io.restassured.config.DecoderConfig.decoderConfig;
-import static io.restassured.config.JsonConfig.jsonConfig;
-import static io.restassured.config.RestAssuredConfig.newConfig;
-import static lv.ctco.cukescore.internal.matchers.ResponseMatcher.aHeader;
-import static lv.ctco.cukescore.internal.matchers.ResponseMatcher.aProperty;
-import static lv.ctco.cukescore.internal.matchers.ResponseMatcher.aStatusCode;
-import static org.hamcrest.Matchers.equalTo;
 
 @Singleton
 @InflateContext
@@ -35,11 +23,7 @@ public class GQLRequestFacade {
     @Inject
     private GlobalWorldFacade world;
 
-    /* Mutable Builder */
     private RequestSpecification specification;
-
-    // TODO: Refactor
-    private AwaitCondition awaitCondition;
 
     @Inject
     public GQLRequestFacade(GlobalWorldFacade world) {
@@ -47,8 +31,14 @@ public class GQLRequestFacade {
         initNewSpecification();
     }
 
+    public void initNewSpecification() {
+        specification = RestAssured
+            .given()
+            .config(world.getRestAssuredConfig());
+        onCreate();
+    }
+
     private void onCreate() {
-        // TODO: Refactor
         Optional<String> $baseUri = world.get(CukesOptions.BASE_URI);
         if ($baseUri.isPresent()) {
             baseUri($baseUri.get());
@@ -56,26 +46,16 @@ public class GQLRequestFacade {
 
         Optional<String> $proxy = world.get(CukesOptions.PROXY);
         if ($proxy.isPresent()) {
-            URI uri;
             try {
-                uri = new URI($proxy.get());
-                specification.proxy(uri);
+                specification.proxy(new URI($proxy.get()));
             } catch (URISyntaxException ignore) {
+                throw new CukesRuntimeException("Unable to set Proxy, please check the URL");
             }
         }
 
-        boolean urlEncodingEnabled = world.getBoolean(CukesOptions.URL_ENCODING_ENABLED);
-        specification.urlEncodingEnabled(urlEncodingEnabled);
-
-        boolean relaxedHttps = world.getBoolean(CukesOptions.RELAXED_HTTPS);
-        if (relaxedHttps) {
-            // TODO: Leak is present. Should have an ability to disable functionality
+        if (world.getBoolean(CukesOptions.RELAXED_HTTPS)) {
             specification.relaxedHTTPSValidation();
             TrustAllTrustManager.trustAllHttpsCertificates();
-        }
-
-        if (!this.world.getBoolean(CukesOptions.GZIP_SUPPORT, true)) {
-            specification.config(newConfig().decoderConfig(decoderConfig().contentDecoders(DEFLATE)));
         }
     }
 
@@ -157,47 +137,5 @@ public class GQLRequestFacade {
 
     public RequestSpecification value() {
         return specification;
-    }
-
-    public void initNewSpecification() {
-        try {
-            // TODO: Somehow this should be configurable
-            specification = RestAssured.given()
-                .config(newConfig()
-                    .jsonConfig(jsonConfig().numberReturnType(JsonPathConfig.NumberReturnType.BIG_DECIMAL)));
-
-            awaitCondition = null;
-            onCreate();
-        } catch (Exception e) {
-            throw new CukesRuntimeException(e);
-        }
-    }
-
-    public void shouldWaitWithIntervalUntilStatusCodeReceived(Time waitTime, Time interval, int sCode) {
-        this.awaitCondition = new AwaitCondition(waitTime, interval, aStatusCode(equalTo(sCode)));
-    }
-
-    public void shouldWaitWithIntervalUntilStatusCodeReceived(Time waitTime, Time interval, int sCode, int failCode) {
-        this.awaitCondition = new AwaitCondition(waitTime, interval, aStatusCode(equalTo(sCode)), aStatusCode(equalTo(failCode)));
-    }
-
-    public void shouldWaitWithIntervalUntilPropertyEqualToValue(Time waitTime, Time interval, String property, String value) {
-        this.awaitCondition = new AwaitCondition(waitTime, interval, aProperty(property, equalTo(value)));
-    }
-
-    public void shouldWaitWithIntervalUntilPropertyEqualToValue(Time waitTime, Time interval, String property, String value, String failValue) {
-        this.awaitCondition = new AwaitCondition(waitTime, interval, aProperty(property, equalTo(value)), aProperty(property, equalTo(failValue)));
-    }
-
-    public void shouldWaitWithIntervalUntilHeaderEqualToValue(Time waitTime, Time interval, String header, String value) {
-        this.awaitCondition = new AwaitCondition(waitTime, interval, aHeader(header, equalTo(value)));
-    }
-
-    public void shouldWaitWithIntervalUntilHeaderEqualToValue(Time waitTime, Time interval, String header, String value, String failValue) {
-        this.awaitCondition = new AwaitCondition(waitTime, interval, aHeader(header, equalTo(value)), aHeader(header, equalTo(failValue)));
-    }
-
-    public AwaitCondition awaitCondition() {
-        return awaitCondition;
     }
 }

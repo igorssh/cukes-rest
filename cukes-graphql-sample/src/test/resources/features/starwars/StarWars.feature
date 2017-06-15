@@ -1,7 +1,7 @@
 Feature: Star Wars Universe
 
   Background:
-    Given query from file "queries/getAllPeople"
+    Given query from file "queries/getAllPeople.graphql"
 
   Scenario: Should retrieve an amount of Universe heroes
     When the query is executed

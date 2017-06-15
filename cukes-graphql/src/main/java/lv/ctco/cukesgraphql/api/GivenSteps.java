@@ -11,7 +11,7 @@ import lv.ctco.cukesgraphql.facade.GQLRequestFacade;
 public class GivenSteps {
 
     @Inject
-    private GQLRequestFacade facade;
+    private GQLRequestFacade requestFacade;
 
     @Inject
     private GlobalWorldFacade world;
@@ -21,7 +21,8 @@ public class GivenSteps {
 
     @Given("^query from file \"(.+)\"$")
     public void request_Body_From_File(String path) {
-        this.facade.body(this.fileReader.read(path));
+        String body = this.fileReader.read(path);
+        this.requestFacade.body(body);
     }
 
 }
