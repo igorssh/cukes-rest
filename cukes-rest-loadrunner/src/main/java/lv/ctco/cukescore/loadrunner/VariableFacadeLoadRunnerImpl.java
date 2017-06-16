@@ -4,11 +4,11 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import lv.ctco.cukescore.internal.context.InflateContext;
 import lv.ctco.cukescore.loadrunner.function.LoadRunnerFunction;
-import lv.ctco.cukesrest.facade.RestVariableFacade;
+import lv.ctco.cukescore.facade.VariableFacade;
 
 @Singleton
 @InflateContext
-public class RestVariableFacadeLoadRunnerImpl implements RestVariableFacade {
+public class VariableFacadeLoadRunnerImpl implements VariableFacade {
 
     @Inject
     LoadRunnerFilter loadRunnerFilter;

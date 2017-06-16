@@ -1,4 +1,4 @@
-package lv.ctco.cukesrest.facade;
+package lv.ctco.cukescore.facade;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Singleton
 @InflateContext
-public class RestVariableFacadeImpl implements RestVariableFacade {
+public class VariableFacadeImpl implements VariableFacade {
 
     @Inject
     private GlobalWorldFacade world;
