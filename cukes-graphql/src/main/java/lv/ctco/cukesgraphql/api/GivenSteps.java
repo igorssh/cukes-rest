@@ -16,11 +16,14 @@ public class GivenSteps {
     private ResourceFileReader fileReader;
 
     @Given("^query from file \"(.+)\"$")
-    public void request_Body_From_File(String path) {
+    public void requestQueryFromFile(String path) {
         String body = this.fileReader.read(path);
-        this.requestFacade.queryBody(body);
+        this.requestQuery(body);
     }
 
-
+    @Given("^query:$")
+    public void requestQuery(String query) {
+        this.requestFacade.queryBody(query);
+    }
 
 }

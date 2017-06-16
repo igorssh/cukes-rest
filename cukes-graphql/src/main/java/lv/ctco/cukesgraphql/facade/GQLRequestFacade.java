@@ -12,10 +12,8 @@ import lv.ctco.cukescore.internal.context.InflateContext;
 import lv.ctco.cukescore.internal.https.TrustAllTrustManager;
 import lv.ctco.cukesgraphql.internal.GraphQLRequest;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URLEncoder;
 
 @Singleton
 @InflateContext
@@ -26,7 +24,7 @@ public class GQLRequestFacade {
 
     private RequestSpecification specification;
 
-    private GraphQLRequest graphQLRequest = new GraphQLRequest();
+    private GraphQLRequest graphQLRequest;
 
     @Inject
     public GQLRequestFacade(GlobalWorldFacade world) {
@@ -39,6 +37,7 @@ public class GQLRequestFacade {
             .given()
             .config(world.getRestAssuredConfig());
         onCreate();
+        graphQLRequest = new GraphQLRequest();
     }
 
     private void onCreate() {
@@ -60,15 +59,6 @@ public class GQLRequestFacade {
             specification.relaxedHTTPSValidation();
             TrustAllTrustManager.trustAllHttpsCertificates();
         }
-    }
-
-    public void queryParam(String parameterName, String parameterValue) {
-        try {
-            parameterValue = URLEncoder.encode(parameterValue, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            // do nothing
-        }
-        specification.queryParam(parameterName, parameterValue);
     }
 
     public void accept(String mediaTypes) {
