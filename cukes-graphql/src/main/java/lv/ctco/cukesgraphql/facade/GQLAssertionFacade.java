@@ -6,11 +6,13 @@ import io.restassured.response.ResponseBody;
 import lv.ctco.cukescore.CukesOptions;
 import lv.ctco.cukescore.internal.context.GlobalWorldFacade;
 import lv.ctco.cukescore.internal.context.InflateContext;
-import lv.ctco.cukescore.internal.matchers.ArrayWithSizeMatcher;
-import lv.ctco.cukescore.internal.matchers.JsonMatchers;
 import lv.ctco.cukescore.internal.switches.SwitchedBy;
+import org.hamcrest.Matcher;
 
+import static lv.ctco.cukescore.internal.matchers.ArrayWithSizeMatcher.arrayWithSize;
 import static lv.ctco.cukescore.internal.matchers.EqualToIgnoringTypeMatcher.equalToIgnoringType;
+import static lv.ctco.cukescore.internal.matchers.JsonMatchers.containsPropertyValueByPathInArray;
+import static lv.ctco.cukescore.internal.matchers.JsonMatchers.containsValueByPath;
 import static org.junit.Assert.assertThat;
 
 @Singleton
@@ -18,22 +20,32 @@ import static org.junit.Assert.assertThat;
 @InflateContext
 public class GQLAssertionFacade {
 
-    private static final String PATH_PREFIX = "data.";
-
     @Inject
     private GlobalWorldFacade world;
 
     @Inject
     GQLResponseFacade responseFacade;
 
+    private String getPath(String path) {
+        return "data." + path;
+    }
+
     public void responseContainsPropertyWithValue(String path, String value) {
-        ResponseBody responseBody = this.responseFacade.response().body();
-        assertThat(responseBody,
-            JsonMatchers.containsValueByPath(PATH_PREFIX + path, equalToIgnoringType(value, this.world.getBoolean("case-insensitive"))));
+        assertBodyValueByPath(path, equalToIgnoringType(value, this.world.getBoolean("case-insensitive")));
     }
 
     public void bodyContainsArrayWithSize(String path, String size) {
+        assertBodyValueByPath(path, arrayWithSize(size));
+    }
+
+    public void bodyContainsArrayWithObjectHavingProperty(String path, String property, String value) {
         ResponseBody responseBody = this.responseFacade.response().body();
-        assertThat(responseBody, JsonMatchers.containsValueByPath(PATH_PREFIX + path, ArrayWithSizeMatcher.arrayWithSize(size)));
+        assertThat(responseBody, containsPropertyValueByPathInArray(getPath(path), property, equalToIgnoringType(value, this.world.getBoolean("case-insensitive")))
+        );
+    }
+
+    private void assertBodyValueByPath(String path, Matcher matcher) {
+        ResponseBody responseBody = this.responseFacade.response().body();
+        assertThat(responseBody, containsValueByPath(getPath(path), matcher));
     }
 }

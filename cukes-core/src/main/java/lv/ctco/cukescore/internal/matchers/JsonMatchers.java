@@ -11,6 +11,7 @@ import org.hamcrest.Matcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
 import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
@@ -19,7 +20,6 @@ public class JsonMatchers {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JsonMatchers.class);
 
-    // TODO: Collect and show all mismatch
     public static Matcher<ResponseBodyExtractionOptions> containsValueByPath(final String path, final Matcher<?> matcher) {
         return new BaseMatcher<ResponseBodyExtractionOptions>() {
 
@@ -28,26 +28,7 @@ public class JsonMatchers {
             @Override
             public boolean matches(Object o) {
                 try {
-                    RestAssuredResponseOptionsImpl responseBody = (RestAssuredResponseOptionsImpl) o;
-                    String contentType = responseBody.getContentType();
-
-                    if (containsIgnoreCase(contentType, "xml")) {
-                        XmlPathConfig config = new XmlPathConfig().disableLoadingOfExternalDtd();
-                        this.value = responseBody.xmlPath(config).get(path);
-
-                    } else if (containsIgnoreCase(contentType, "html")) {
-                        XmlPath htmlPath = responseBody.htmlPath();
-                        List<Object> list = htmlPath.getList(path);
-                        this.value =
-                            list.size() > 1
-                                ? list
-                                : htmlPath.getString(path);
-
-                    } else {
-                        JsonPathConfig config = new JsonPathConfig().numberReturnType(JsonPathConfig.NumberReturnType.BIG_DECIMAL);
-                        this.value = responseBody.jsonPath(config).get(path);
-                    }
-
+                    this.value = retrieveValueByPath(o, path);
                     return matcher.matches(this.value);
                 } catch (Exception e) {
                     LOGGER.info(e.getMessage(), e);
@@ -68,39 +49,20 @@ public class JsonMatchers {
         };
     }
 
-    // TODO: Collect and show all mismatch
     public static Matcher<ResponseBodyExtractionOptions> containsValueByPathInArray(final String path, final Matcher<?> matcher) {
         return new BaseMatcher<ResponseBodyExtractionOptions>() {
-
             private Object value;
 
             @Override
             public boolean matches(Object o) {
-                try {
-                    RestAssuredResponseOptionsImpl responseBody = (RestAssuredResponseOptionsImpl) o;
-                    if (containsIgnoreCase(responseBody.getContentType(), "xml")) {
-                        XmlPathConfig config = new XmlPathConfig().disableLoadingOfExternalDtd();
-                        this.value = responseBody.xmlPath(config).get(path);
-                    } else if (containsIgnoreCase(responseBody.getContentType(), "html")) {
-                        XmlPath htmlPath = responseBody.htmlPath();
-                        List<Object> list = htmlPath.getList(path);
-                        this.value =
-                            list.size() > 1
-                                ? list
-                                : htmlPath.getString(path);
-                    } else {
-                        JsonPathConfig config = new JsonPathConfig().numberReturnType(JsonPathConfig.NumberReturnType.BIG_DECIMAL);
-                        this.value = responseBody.jsonPath(config).get(path);
-                    }
-                    if (this.value instanceof List) {
-                        List<Object> list = (List) this.value;
-                        return matchObjectInArray(list.toArray());
-                    } else if (this.value instanceof Object[]) {
-                        return matchObjectInArray((Object[]) this.value);
-                    } else {
-                        return false;
-                    }
-                } catch (Exception e) {
+                this.value = retrieveValueByPath(o, path);
+
+                if (this.value instanceof List) {
+                    List list = (List) this.value;
+                    return matchObjectInArray(list.toArray());
+                } else if (this.value instanceof Object[]) {
+                    return matchObjectInArray((Object[]) this.value);
+                } else {
                     return false;
                 }
             }
@@ -125,5 +87,70 @@ public class JsonMatchers {
                 matcher.describeMismatch(this.value, description);
             }
         };
+    }
+
+    public static Matcher<ResponseBodyExtractionOptions> containsPropertyValueByPathInArray(final String path, final String property, final Matcher<?> matcher) {
+        return new BaseMatcher<ResponseBodyExtractionOptions>() {
+            private Object value;
+
+            @Override
+            public boolean matches(Object o) {
+                this.value = retrieveValueByPath(o, path);
+
+                if (this.value instanceof List) {
+                    List list = (List) this.value;
+                    return matchObjectPropertyInArray(property, list.toArray());
+                } else if (this.value instanceof Object[]) {
+                    return matchObjectPropertyInArray(property, (Object[]) this.value);
+                } else {
+                    return false;
+                }
+            }
+
+            @SuppressWarnings("unchecked")
+            private boolean matchObjectPropertyInArray(String property, Object[] objects) {
+                for (Object object : objects) {
+                    HashMap<String, String> map = (HashMap<String, String>) object;
+                    if (map != null && matcher.matches(map.get(property))) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("Path " + path + " contains ");
+                matcher.describeTo(description);
+            }
+
+            @Override
+            public void describeMismatch(Object item, Description description) {
+                matcher.describeMismatch(this.value, description);
+            }
+        };
+    }
+
+    private static Object retrieveValueByPath(Object o, String path) {
+        RestAssuredResponseOptionsImpl responseBody = (RestAssuredResponseOptionsImpl) o;
+        String contentType = responseBody.getContentType();
+        Object value;
+        if (containsIgnoreCase(contentType, "xml")) {
+            XmlPathConfig config = new XmlPathConfig().disableLoadingOfExternalDtd();
+            value = responseBody.xmlPath(config).get(path);
+
+        } else if (containsIgnoreCase(contentType, "html")) {
+            XmlPath htmlPath = responseBody.htmlPath();
+            List<Object> list = htmlPath.getList(path);
+            value =
+                list.size() > 1
+                    ? list
+                    : htmlPath.getString(path);
+
+        } else {
+            JsonPathConfig config = new JsonPathConfig().numberReturnType(JsonPathConfig.NumberReturnType.BIG_DECIMAL);
+            value = responseBody.jsonPath(config).get(path);
+        }
+        return value;
     }
 }

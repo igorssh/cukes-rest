@@ -6,4 +6,7 @@ Feature: Star Wars Universe
   Scenario: Should retrieve an amount of Universe heroes
     When the query is executed
     Then response contains property "conference.name" with value "GraphQL-Europe"
-    And response contains an array "conference.schedule" of size 23
+    And response contains an array "conference.tickets" of size 3
+    And response contains property "conference.dateStart" with value "2017-05-21"
+    And response contains property "conference.dateStart" with value "2017-05-21"
+    And response contains an array "conference.sponsors" with object having property "name" with value "Facebook"
