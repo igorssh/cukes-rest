@@ -23,6 +23,7 @@ deploy:
     - script:
         name: saving settings.xml
         code: |
+          mkdir -p ~/.m3
           shopt -s xpg_echo
           echo $MAVEN_SETTINGS > ~/.m3/settings.xml
     - script:
@@ -53,6 +54,7 @@ release:
     - script:
         name: saving settings.xml
         code: |
+          mkdir -p ~/.m3
           shopt -s xpg_echo
           echo $MAVEN_SETTINGS > ~/.m3/settings.xml
     - script:
