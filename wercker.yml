@@ -21,6 +21,11 @@ deploy:
           gpg --import ~/gpgkey_sec.gpg
           srm -vz ~/gpgkey_sec.gpg ~/gpgkey_pub.gpg
     - script:
+        name: saving settings.xml
+        code: |
+          shopt -s xpg_echo
+          echo $MAVEN_SETTINGS > ~/.m3/settings.xml
+    - script:
         name: deploy snapshot
         code: |
           mvn --batch-mode -Dmaven.test.skip=true deploy -P release
@@ -45,6 +50,11 @@ release:
           echo $GPGKEY_SEC > ~/gpgkey_sec.gpg
           gpg --import ~/gpgkey_sec.gpg
           srm -vz ~/gpgkey_sec.gpg ~/gpgkey_pub.gpg
+    - script:
+        name: saving settings.xml
+        code: |
+          shopt -s xpg_echo
+          echo $MAVEN_SETTINGS > ~/.m3/settings.xml
     - script:
         name: run release
         code: |
