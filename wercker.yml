@@ -10,7 +10,7 @@ test:
 deploy:
   steps:
     - install-packages:
-        packages: secure-delete
+        packages: secure-delete gnupg2 gnupg-agent
     - script:
         name: import gpg keys
         code: |
@@ -34,7 +34,7 @@ deploy:
 release:
   steps:
     - install-packages:
-        packages: secure-delete
+        packages: secure-delete gnupg2 gnupg-agent
     - add-ssh-key:
         keyname: GITHUB_KEY
     - add-to-known_hosts:
