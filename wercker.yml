@@ -1,4 +1,4 @@
-box: maven:3.5.0-jdk-6
+box: maven:3-jdk-6
 
 test:
   steps:
