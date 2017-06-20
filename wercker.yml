@@ -31,7 +31,8 @@ deploy:
     - script:
         name: deploy snapshot
         code: |
-          mvn --batch-mode -Dmaven.test.skip=true deploy -P release -s ~/.m3/settings.xml
+          ls -lah ~
+#          mvn --batch-mode -Dmaven.test.skip=true deploy -P release -s ~/.m3/settings.xml
 
 release:
   steps:
