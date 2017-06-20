@@ -20,7 +20,7 @@ deploy:
           echo $GPGKEY_SEC > ~/gpgkey_sec.gpg
           gpg2 --import ~/gpgkey_sec.gpg
           srm -vz ~/gpgkey_sec.gpg ~/gpgkey_pub.gpg
-          lsb_release -a
+          cat /proc/version
     - script:
         name: saving settings.xml
         code: |
