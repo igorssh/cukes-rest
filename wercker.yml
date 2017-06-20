@@ -12,10 +12,6 @@ deploy:
     - install-packages:
         packages: secure-delete gnupg2 gnupg-agent
     - script:
-        name: setting locale
-        code: |
-          export LC_ALL=en_US.UTF-8
-    - script:
         name: import gpg keys
         code: |
           shopt -s xpg_echo
