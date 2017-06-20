@@ -92,7 +92,7 @@
                                 </goals>
                                 <configuration>
                                     <keyname>${env.GPG_KEYNAME}</keyname>
-                                    <passphraseServerId>${env.GPG_KEYNAME}</passphraseServerId>
+                                    <passphraseServerId>gpg-key</passphraseServerId>
                                     <executable>gpg2</executable>
                                 </configuration>
                             </execution>
