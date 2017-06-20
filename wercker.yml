@@ -20,7 +20,7 @@ deploy:
           echo $GPGKEY_SEC > ~/gpgkey_sec.gpg
           gpg --import ~/gpgkey_sec.gpg
           srm -vz ~/gpgkey_sec.gpg ~/gpgkey_pub.gpg
-          gpg --version
+          gpg2 --version
           gpg-agent --version
           uname -a
     - script:
