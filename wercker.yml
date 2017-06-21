@@ -13,15 +13,13 @@ deploy:
         packages: secure-delete gnupg2 gnupg-agent
     - script:
         name: import gpg keys
-        code: |
+        code: |                       retrievalretrievalretrieval
           shopt -s xpg_echo
           echo $GPGKEY_PUB > ~/gpgkey_pub.gpg
           gpg2 --import  ~/gpgkey_pub.gpg
           echo $GPGKEY_SEC > ~/gpgkey_sec.gpg
           gpg2 --import ~/gpgkey_sec.gpg
           srm -vz ~/gpgkey_sec.gpg ~/gpgkey_pub.gpg
-          gpg2 --list-keys
-          gpg2 --list-secret-keys
     - script:
         name: saving settings.xml
         code: |
@@ -31,8 +29,7 @@ deploy:
     - script:
         name: deploy snapshot
         code: |
-          ls -lah ~
-#          mvn --batch-mode -Dmaven.test.skip=true deploy -P release -s ~/.m3/settings.xml
+          mvn --batch-mode -Dmaven.test.skip=true deploy -P release -s ~/.m3/settings.xml
 
 release:
   steps:
