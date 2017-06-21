@@ -29,7 +29,7 @@ deploy:
     - script:
         name: deploy snapshot
         code: |
-#          mvn --batch-mode -Dmaven.test.skip=true deploy -P release -s ~/.m2/settings.xml
+          mvn --batch-mode -Dmaven.test.skip=true deploy -P release -s ~/.m2/settings.xml
 
 
 release:
