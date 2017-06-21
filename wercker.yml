@@ -29,7 +29,7 @@ deploy:
     - script:
         name: deploy snapshot
         code: |
-          mvn --batch-mode -Dmaven.test.skip=true deploy -P release
+          mvn --batch-mode -Dmaven.test.skip=true deploy -P release -s ~/.m2/settings.xml
 
 
 release:
@@ -69,5 +69,5 @@ release:
           git config --global user.email "cscm@ctco.lv"
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/id_rsa
-          mvn --batch-mode -Dmaven.test.skip=true -DuseReleaseProfile=false -DscmCommentPrefix="[maven-release-plugin][skip ci]" --batch-mode release:prepare release:perform -P release
+#          mvn --batch-mode -Dmaven.test.skip=true -DuseReleaseProfile=false -DscmCommentPrefix="[maven-release-plugin][skip ci]" --batch-mode release:prepare release:perform -P release -s ~/.m2/settings.xml
 
