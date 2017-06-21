@@ -13,7 +13,7 @@ deploy:
         packages: secure-delete gnupg2 gnupg-agent
     - script:
         name: import gpg keys
-        code: |                       retrievalretrievalretrieval
+        code: |
           shopt -s xpg_echo
           echo $GPGKEY_PUB > ~/gpgkey_pub.gpg
           gpg2 --import  ~/gpgkey_pub.gpg
@@ -23,13 +23,13 @@ deploy:
     - script:
         name: saving settings.xml
         code: |
-          mkdir -p ~/.m3
+          mkdir -p ~/.m2
           shopt -s xpg_echo
-          echo $MAVEN_SETTINGS > ~/.m3/settings.xml
+          echo $MAVEN_SETTINGS > ~/.m2/settings.xml
     - script:
         name: deploy snapshot
         code: |
-          mvn --batch-mode -Dmaven.test.skip=true deploy -P release -s ~/.m3/settings.xml
+          mvn --batch-mode -Dmaven.test.skip=true deploy -P release
 
 release:
   steps:
@@ -54,9 +54,9 @@ release:
     - script:
         name: saving settings.xml
         code: |
-          mkdir -p ~/.m3
+          mkdir -p ~/.m2
           shopt -s xpg_echo
-          echo $MAVEN_SETTINGS > ~/.m3/settings.xml
+          echo $MAVEN_SETTINGS > ~/.m2/settings.xml
     - script:
         name: run release
         code: |
@@ -66,5 +66,7 @@ release:
           git remote -v
           git config --global user.name "C.T.Co SCM"
           git config --global user.email "cscm@ctco.lv"
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_rsa
           mvn --batch-mode -Dmaven.test.skip=true -DuseReleaseProfile=false -DscmCommentPrefix="[maven-release-plugin][skip ci]" --batch-mode release:prepare release:perform -P release
 
