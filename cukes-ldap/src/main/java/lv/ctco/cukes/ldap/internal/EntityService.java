@@ -4,9 +4,12 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import lv.ctco.cukes.core.CukesRuntimeException;
 
+import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
-import javax.naming.directory.Attributes;
-import javax.naming.directory.DirContext;
+import javax.naming.directory.*;
+import javax.naming.ldap.LdapContext;
+import java.util.List;
+import java.util.TreeSet;
 
 @Singleton
 public class EntityService {
@@ -19,7 +22,7 @@ public class EntityService {
             DirContext context = connectionService.getContext();
             return context.getAttributes(dn);
         } catch (NamingException e) {
-            throw new CukesRuntimeException("Cannot retrieve entity by dn " + dn, e);
+            return null;
         } finally {
             connectionService.close();
         }
@@ -36,4 +39,36 @@ public class EntityService {
         }
     }
 
+    public void deleteEntityByDn(String dn) {
+        try {
+            LdapContext context = connectionService.getContext();
+            SearchControls searchControls = new SearchControls();
+            searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
+            NamingEnumeration<SearchResult> children = context.search(dn, "(objectclass=*)", searchControls);
+            TreeSet<String> dnsToDelete = new TreeSet<>(new DnComparator(true));
+            while (children.hasMoreElements()) {
+                SearchResult childResult = children.nextElement();
+                String childDn = childResult.getNameInNamespace();
+                dnsToDelete.add(childDn);
+            }
+            for (String s : dnsToDelete) {
+                context.destroySubcontext(s);
+            }
+        } catch (NamingException e) {
+            throw new CukesRuntimeException("Cannot delete entity by dn " + dn, e);
+        } finally {
+            connectionService.close();
+        }
+    }
+
+    public void modifyByDn(String dn, List<ModificationItem> modificationItems) {
+        try {
+            LdapContext context = connectionService.getContext();
+            context.modifyAttributes(dn, modificationItems.toArray(new ModificationItem[modificationItems.size()]));
+        } catch (NamingException e) {
+            throw new CukesRuntimeException("Cannot modify entity by dn " + dn, e);
+        } finally {
+            connectionService.close();
+        }
+    }
 }

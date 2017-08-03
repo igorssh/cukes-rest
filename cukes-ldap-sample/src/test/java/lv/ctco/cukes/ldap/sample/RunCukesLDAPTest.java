@@ -3,6 +3,7 @@ package lv.ctco.cukes.ldap.sample;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
@@ -15,16 +16,15 @@ import org.junit.runner.RunWith;
 )
 public class RunCukesLDAPTest {
 
-    private static EmbeddedLDAPServer server;
+    private static CukesLDAPBootstrap bootstrap = new CukesLDAPBootstrap();
 
     @BeforeClass
     public static void setUp() throws Exception {
-        server = new EmbeddedLDAPServer();
-        server.start();
+        bootstrap.beforeAllTests();
     }
 
     @AfterClass
-    public static void tearDown() throws Exception {
-        server.stop();
+    public static void tearDown() {
+        bootstrap.afterAllTests();
     }
 }
